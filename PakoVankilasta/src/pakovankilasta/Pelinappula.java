@@ -1,7 +1,9 @@
 package pakovankilasta;
 
 /**
- *
+ * Pelinappula-luokka on pelissä käytettävien nappuloiden (Vartija ja Vanki) yliluokka.
+ * Pelinappula sisältää tiedon Ruudusta, jossa on.
+ * 
  * @author Olli Väisänen
  */
 public class Pelinappula {
@@ -9,34 +11,41 @@ public class Pelinappula {
     protected Ruutu sijainti;
 
     /**
-     * Palauttaa muuttujan sijainti (ruudun jossa pelinappula on) arvon
+     * getSijainti palauttaa Pelinappulan sijainnin (Ruudun)
      *
-     * @return sijainti-muuttujan arvo
+     * @return sijainti-muuttujan arvon (Ruutu)
      */
     public Ruutu getSijainti() {
         return sijainti;
     }
     
     /**
-     * Asettaa muuttujalle sijainti uuden arvon
+     * liiku-metodi liikuttaa Pelinappulaa laudalla
      *
-     * @param sijainti sijainti-muuttujan uusi arvo
+     * @param kohde Pelinappulan uusi Ruutu
      */
-    public void setSijainti(Ruutu sijainti) {
-        this.sijainti = sijainti;
+    public void liiku(Ruutu kohde) {
+        
+        if(kohde.getNappula() == null){
+            kohde.setNappula(this);
+            this.sijainti = kohde;
+        } else {
+            System.out.println("Ruudussa on jo nappula!");
+        }
+
     }
 
     /**
-     * Kostruktori pelinappulalle, joka ei ole ruudussa
-     * 
+     * Kostruktori pelinappulalle, joka ei ole ruudussa (Vangit alussa)
      * 
      */
     public Pelinappula() {
         this.sijainti = null;
     }
     
+    //Tarvitaanko tätä Vartijoille?
     /**
-     * Konstruktori aloitusruudussa sijaitsevan pelinappulan luomiseen 
+     * Konstruktori aloitusruudussa sijaitsevan pelinappulan luomiseen (Vartijat)
      * 
      * @param sijainti pelinappulan aloitusruutu
      */
