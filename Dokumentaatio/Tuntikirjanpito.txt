@@ -1,1 +1,3 @@
-ti 15.1. ~2h: Gitin asennus, GitHub, repoharkat, tehtäväkuvaus, NetBeansin asennus
+ti 15.1.	2h: Gitin asennus, GitHub, repoharkat, tehtäväkuvaus, NetBeansin asennus
+ti 22.1.	1h: Pelinappula- ja Ruutu-luokat perustettu
+			
