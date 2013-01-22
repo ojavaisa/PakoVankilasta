@@ -24,13 +24,15 @@ public class Ruutu {
      *
      * @param nappula nappula-muuttujan uusi arvo
      */
-    public void setNappula(Pelinappula nappula) { //Entä kun ruutuun siirtyy vartija
+    public void setNappula(Pelinappula nappula) { //Entä kun ruutuun siirtyy vartija?
         if(this.nappula == null) {
             this.nappula = nappula;
         } else {
             System.out.println("Siirto ei onnistu!");
         }
     }
+
+    //setNappula(null) ruudun tyhjentämiseen?
 
     /**
      * Konstruktori luo tyhjän ruudun

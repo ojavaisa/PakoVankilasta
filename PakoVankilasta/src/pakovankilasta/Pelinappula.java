@@ -27,6 +27,9 @@ public class Pelinappula {
     public void liiku(Ruutu kohde) {
         
         if(kohde.getNappula() == null){
+            if(this.sijainti != null){
+                this.sijainti.setNappula(null);
+            }
             kohde.setNappula(this);
             this.sijainti = kohde;
         } else {
