@@ -9,23 +9,28 @@ public class Ruutu {
     protected Pelinappula nappula;
     
     /**
-     * Get the value of nappula
+     * Palauttaa muuttujan nappula (ruudussa oleva pelinappula) arvo
      *
-     * @return the value of nappula
+     * @return nappula-muuttujan arvo
      */
     public Pelinappula getNappula() {
         return nappula;
     }
 
     /**
-     * Set the value of nappula
+     * Asettaa muuttujan nappula (ruudussa oleva pelinappula) arvo
      *
-     * @param nappula new value of nappula
+     * @param nappula nappula-muuttujan uusi arvo
      */
     public void setNappula(Pelinappula nappula) {
         this.nappula = nappula;
     }
 
+    /**
+     * Konstruktori luo tyhjän ruudun
+     * 
+     * 
+     */
     public Ruutu() {
         this.nappula = null;
     }
