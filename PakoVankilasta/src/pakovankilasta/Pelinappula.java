@@ -28,7 +28,7 @@ public class Pelinappula {
         
         if(kohde.getNappula() == null){
             if(this.sijainti != null){
-                this.sijainti.setNappula(null);
+                this.sijainti.setNappulaNull();
             }
             kohde.setNappula(this);
             this.sijainti = kohde;

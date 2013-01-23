@@ -17,6 +17,7 @@ public class Ruutu {
     public Pelinappula getNappula() {
         return nappula;
     }
+    
 
     /**
      * setNappula-metodi asettaa ruutuun pelinappulan.
@@ -32,7 +33,12 @@ public class Ruutu {
         }
     }
 
-    //setNappula(null) ruudun tyhjentämiseen?
+    /**
+     * setNappulaNull-metodi tyhjentää ruudun (asettaa Ruudun Pelinappulan arvoksi null).
+     */
+    public void setNappulaNull() {
+        this.nappula = null;
+    }
 
     /**
      * Konstruktori luo tyhjän ruudun

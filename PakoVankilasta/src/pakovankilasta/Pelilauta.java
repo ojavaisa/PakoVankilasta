@@ -51,6 +51,28 @@ public class Pelilauta {
             rivit[i].asetaVartija();
         }
     }
+    
+    public boolean reittiVapaa(Vanki vanki, int sarake, int rivi) {
+        
+        if(vanki.getSijainti() == null) {
+            //???
+        } else {
+            Ruutu alku = vanki.getSijainti();
+            //HUOM! Jatka tästä! Miten saadaan nappulalta tieto sarakkeesta/rivistä???
+        }
+        
+        return true;
+    }
+    
+    /**
+     * getRivi antaa parametrina annetun Rivin
+     *
+     * @param rivi Halutun Ruudun numero Rivillä
+     * @return Haluttu Ruutu
+     */
+    public Rivi getRivi(int rivi) {
+        return rivit[rivi];
+    }
 
     @Override
     public String toString(){

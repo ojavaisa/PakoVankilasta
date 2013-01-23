@@ -62,6 +62,17 @@ public class Rivi {
         }
 
     }
+    
+    /**
+     * getRuutu antaa parametrina annetun Ruudun
+     *
+     * @param sarake Halutun Ruudun numero Rivillä
+     * @return Haluttu Ruutu
+     */
+    public Ruutu getRuutu(int sarake) {
+        return ruudut[sarake];
+    }
+    
 //    //Tarvitaanko?
 //    /**
 //     * getKoko antaa rivin koon.
@@ -71,15 +82,15 @@ public class Rivi {
 //    public int getKoko() {
 //        return koko;
 //    }
-//    //Tarvitaanko?
-//    /**
-//     * getRiviNro-metodi antaa rivin järjestysnumeron (alkaen venepäädystä).
-//     *
-//     * @return antaa rivin järjestynumeron
-//     */
-//    public int getRiviNro() {
-//        return koko;
-//    }
+
+    /**
+     * getRiviNro-metodi antaa rivin järjestysnumeron vankilan pihasta.
+     *
+     * @return antaa rivin järjestynumeron
+     */
+    public int getRiviNro() {
+        return riviNro;
+    }
     
     @Override
     public String toString(){
