@@ -27,7 +27,7 @@ public class Ruutu {
     public void setNappula(Pelinappula nappula) { //Entä kun ruutuun siirtyy vartija?
         if(this.nappula == null) {
             this.nappula = nappula;
-        } else {
+        } else {  //Myöhemmin käyttöliittymässä!!!
             System.out.println("Siirto ei onnistu!");
         }
     }

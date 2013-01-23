@@ -33,7 +33,6 @@ public class PelinappulaTest {
         nappula2 = new Pelinappula();
         ruutu1 = new Ruutu();
         ruutu2 = new Ruutu();
-        
     }
     
     @After

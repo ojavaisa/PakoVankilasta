@@ -32,7 +32,7 @@ public class Pelinappula {
             }
             kohde.setNappula(this);
             this.sijainti = kohde;
-        } else {
+        } else { //Myöhemmin käyttöliittymässä!!
             System.out.println("Ruudussa on jo nappula!");
         }
 
