@@ -42,4 +42,15 @@ public class Ruutu {
         this.nappula = null;
     }
 
+    @Override
+    public String toString() {
+        if(this.nappula == null) {
+            return "| ";
+        } else {
+            return "|" + this.nappula.toString();
+        }
+    }
+    
+    
+
 }
