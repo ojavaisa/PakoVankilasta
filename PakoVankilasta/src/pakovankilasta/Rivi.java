@@ -85,10 +85,10 @@ public class Rivi {
     public String toString(){
         String rivi = " ";
         
-        if(riviNro <= 9) {
-            rivi = rivi + " " + (riviNro);
+        if(riviNro < 9) {
+            rivi = rivi + " " + (riviNro + 1);
         } else {
-            rivi = rivi + (riviNro);
+            rivi = rivi + (riviNro + 1);
         }
 
         for(int i=0; i<ruudut.length; i++){

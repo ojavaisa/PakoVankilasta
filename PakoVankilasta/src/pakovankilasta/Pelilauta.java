@@ -64,7 +64,7 @@ public class Pelilauta {
         }
         lauta = lauta + "\n";
 
-        for(int i=rivit.length-1; i>0; i--){
+        for(int i=rivit.length-1; i>=0; i--){
             lauta = lauta + rivit[i] + "\n";
         }
         return lauta;

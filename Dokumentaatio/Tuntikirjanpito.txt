@@ -1,4 +1,6 @@
 ti 15.1.	2h: Gitin asennus, GitHub, repoharkat, tehtäväkuvaus, NetBeansin asennus
 ti 22.1.	1h: Pelinappula- ja Ruutu-luokat perustettu
 			5h: Pelinappula- ja Ruutu-luokkien metodeja & testausluokat, testimetodeja
-ke 23.1.	2h: Esitietokurssien kertausta, Rivi-luokan aloitus
+ke 23.1.	7h: Esitietokurssien kertausta, Rivi-luokka, Pelilauta-luokka, pääohjelman aloitus,
+				Pelilaudan (ja sitä kautta Rivin ja Ruudun) tulostus, Vartija-luokka, Vartijoiden alkuasettelu
+				Vanki-luokka, Pakoruutu-luokka
