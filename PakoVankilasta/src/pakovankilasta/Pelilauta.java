@@ -16,18 +16,7 @@ public class Pelilauta {
     
     public Pelilauta(int koko) {
 
-        if(koko<5 || koko>15){ //Tämä osa pääohjelmaan?
-            this.leveys = 9;
-            System.out.println("Annoit virheellisen laudan koon. \n" +
-                    "Käytetään oletuslautaa (9x9).\n");
-        } else if((koko%2)==0){
-            this.leveys = koko - 1;
-            System.out.println("Annoit parillisen laudan koon.\n" +
-                    "Käytetään yhtä pienempää laudan kokoa (" +this.leveys+ "x" +this.leveys+ ").\n");
-        } else {
-            this.leveys = koko;
-            System.out.println("Laudan koko on (" +this.leveys+ "x" +this.leveys+ ").\n");
-        }
+        this.leveys = koko;
 
         this.rivit = new Rivi[this.leveys+1]; //Laudan korkeus on leveys+1
         luoRivit(rivit);
@@ -52,17 +41,63 @@ public class Pelilauta {
         }
     }
     
-    public boolean reittiVapaa(Vanki vanki, int sarake, int rivi) {
-        
-        if(vanki.getSijainti() == null) {
-            //???
-        } else {
-            Ruutu alku = vanki.getSijainti();
-            //HUOM! Jatka tästä! Miten saadaan nappulalta tieto sarakkeesta/rivistä???
-        }
-        
-        return true;
-    }
+//    /**
+//     * siirtoSallittu tarkistaa että siirto on joko vaakasuoraan tai pystysuoraan
+//     * (Selvittää lähtöruudunkin???)
+//     * ALSO pitää selvittää, että kyseisen rivin Vartija ei jyrää päälle!!!
+//     * 
+//     * 
+//     * @param vanki
+//     * @param sarake
+//     * @param rivi
+//     * @return 
+//     */
+//    public boolean siirtoSallittu(Vanki vanki, int sarake, int rivi){
+//        
+//        int vartijanRuudunNro;
+//        //ENNEN tätä tapaus rivi=0!!! Siirto aina sallittu? tarviiko tulla tähän metodiin
+//        if(vanki.getSijainti() == null){
+//            for(int i=0; i<this.leveys; i++){
+//                if(this.rivit[rivi].ruudut[i].getNappula() == this.rivit[rivi].vartija) { //Olioiden vertailu?
+//                    vartijanRuudunNro = i;
+//                }
+//            }
+//            if(vartijanRuudunNro <= sarake){ //TARKISTA aukot! -> vartijan#==sarake
+//                if((rivi+1) >= (vartijanRuudunNro + (rivi+1))) { //TARKISTA että menee oikein!
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            } else {
+//                if((rivi+1) >= (vartijanRuudunNro - (rivi+1))) { //TARKISTA
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            }
+//
+//        }
+//    }
+    
+//    /**
+//     * reittiVapaa tarkistaa ettei siirron tiellä ole muita nappuloita (Vartijoita tai Vankeja)
+//     * 
+//     * @param vanki
+//     * @param sarake
+//     * @param rivi
+//     * @return 
+//     */
+//    public boolean reittiVapaa(Vanki vanki, int sarake, int rivi) {
+//        
+//        if(vanki.getSijainti() == null) {
+//            //???
+//        } else {
+//            Ruutu alku = vanki.getSijainti();
+//            //HUOM! Jatka tästä! Miten saadaan nappulalta tieto sarakkeesta/rivistä???
+//        }
+//        
+//        return true;
+//    }
     
     /**
      * getRivi antaa parametrina annetun Rivin

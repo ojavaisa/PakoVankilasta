@@ -32,7 +32,7 @@ public class Rivi {
         //mahdolliset Pakoruudut?
         
         for(int i=0; i < ruudut.length; i++) {
-            ruudut[i] = new Ruutu();
+            ruudut[i] = new Ruutu(i, this.riviNro);
         }
     }
 
@@ -63,16 +63,16 @@ public class Rivi {
 
     }
     
-    /**
-     * getRuutu antaa parametrina annetun Ruudun
-     *
-     * @param sarake Halutun Ruudun numero Rivillä
-     * @return Haluttu Ruutu
-     */
-    public Ruutu getRuutu(int sarake) {
-        return ruudut[sarake];
-    }
-    
+//    /**
+//     * getRuutu antaa parametrina annetun Ruudun
+//     *
+//     * @param sarake Halutun Ruudun numero Rivillä
+//     * @return Haluttu Ruutu
+//     */
+//    public Ruutu getRuutu(int sarake) {
+//        return ruudut[sarake];
+//    }
+//    
 //    //Tarvitaanko?
 //    /**
 //     * getKoko antaa rivin koon.

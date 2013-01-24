@@ -8,9 +8,11 @@ package pakovankilasta;
 public class Ruutu {
     
     protected Pelinappula nappula;
+    protected int riviNro, sarakeNro;
+    //protected boolean pakoRuutu;
     
     /**
-     * getNappula-metodi antaa ruudussa olevan pelinappulan.
+     * getNappula-metodi antaa Ruudussa olevan pelinappulan.
      *
      * @return Ruudussa oleva pelinappula
      */
@@ -18,6 +20,23 @@ public class Ruutu {
         return nappula;
     }
     
+    /**
+     * getRivi-metodi antaa Ruudun rivinumeron.
+     *
+     * @return Ruudun rivin numero
+     */
+    public int getRivi() {
+        return riviNro;
+    }
+    
+    /**
+     * getSarake-metodi antaa Ruudun sarakenumeron.
+     *
+     * @return Ruudun sarakkeen numero
+     */
+    public int getSarake() {
+        return sarakeNro;
+    }
 
     /**
      * setNappula-metodi asettaa ruutuun pelinappulan.
@@ -44,8 +63,10 @@ public class Ruutu {
      * Konstruktori luo tyhjän ruudun
      * 
      */
-    public Ruutu() {
+    public Ruutu(int sarake, int rivi) {
         this.nappula = null;
+        this.riviNro = rivi;
+        this.sarakeNro = sarake;
     }
 
     @Override
