@@ -7,9 +7,9 @@ package pakovankilasta;
  */
 public class Ruutu {
     
-    protected Pelinappula nappula;
-    protected int riviNro, sarakeNro;
-    //protected boolean pakoRuutu;
+    private Pelinappula nappula;
+    private int riviNro, sarakeNro;
+    private boolean pakoRuutu;
     
     /**
      * getNappula-metodi antaa Ruudussa olevan pelinappulan.
@@ -37,6 +37,15 @@ public class Ruutu {
     public int getSarake() {
         return sarakeNro;
     }
+    
+    /**
+     * onkoPako-metodi kertoo onko Ruutu pakoruutu.
+     * 
+     * @return Totuusarvona onko Ruutu pakoruutu.
+     */
+    public boolean onkoPako() {
+        return pakoRuutu;
+    }
 
     /**
      * setNappula-metodi asettaa ruutuun pelinappulan.
@@ -63,16 +72,21 @@ public class Ruutu {
      * Konstruktori luo tyhjän ruudun
      * 
      */
-    public Ruutu(int sarake, int rivi) {
+    public Ruutu(int sarake, int rivi, boolean pako) {
         this.nappula = null;
         this.riviNro = rivi;
         this.sarakeNro = sarake;
+        this.pakoRuutu = pako;
     }
 
     @Override
     public String toString() {
         if(this.nappula == null) {
-            return "| ";
+            if(this.pakoRuutu){
+                return "|_";
+            } else {
+                return "| ";
+            }
         } else {
             return "|" + this.nappula.toString();
         }

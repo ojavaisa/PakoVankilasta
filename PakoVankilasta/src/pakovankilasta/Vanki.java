@@ -10,6 +10,10 @@ public class Vanki extends Pelinappula {
         super();
     }
     
+    public void takaisinSelliin() {
+        this.sijainti = null;
+    }
+    
     @Override
     public String toString() {
         return "x";

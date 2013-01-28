@@ -11,8 +11,8 @@ package pakovankilasta;
  */
 public class Pelilauta {
 
-    protected int leveys;
-    protected Rivi[] rivit; //ArrayList tai vast?
+    private int leveys;
+    private Rivi[] rivit; //ArrayList tai vast?
     
     public Pelilauta(int koko) {
 
@@ -79,31 +79,32 @@ public class Pelilauta {
 //        }
 //    }
     
-//    /**
-//     * reittiVapaa tarkistaa ettei siirron tiellä ole muita nappuloita (Vartijoita tai Vankeja)
-//     * 
-//     * @param vanki
-//     * @param sarake
-//     * @param rivi
-//     * @return 
-//     */
-//    public boolean reittiVapaa(Vanki vanki, int sarake, int rivi) {
-//        
-//        if(vanki.getSijainti() == null) {
-//            //???
-//        } else {
-//            Ruutu alku = vanki.getSijainti();
-//            //HUOM! Jatka tästä! Miten saadaan nappulalta tieto sarakkeesta/rivistä???
-//        }
-//        
-//        return true;
-//    }
+    /**
+     * reittiVapaa tarkistaa ettei siirron tiellä ole Vartijoita
+     * 
+     * @param vanki Vanki, jota halutaan liikuttaa
+     * @param sarake kohteena olevan Ruudun sarakeen numero
+     * @param rivi kohteena olevan Ruudun rivinumero
+     * @return totuusarvo true, jos edessä ei ole vartijoita
+     */
+    public boolean reittiVapaa(Vanki vanki, int sarake, int rivi) {
+        
+        if(vanki.getSijainti() == null) {
+            //???
+        } else {
+            Ruutu alku = vanki.getSijainti();
+            alku.getRivi();
+        }
+        
+        return true;
+    }
     
+    //Tarvitaanko?
     /**
      * getRivi antaa parametrina annetun Rivin
      *
-     * @param rivi Halutun Ruudun numero Rivillä
-     * @return Haluttu Ruutu
+     * @param rivi Halutun Rivin numero (alkaen vankilan pihasta)
+     * @return Haluttu Rivi
      */
     public Rivi getRivi(int rivi) {
         return rivit[rivi];

@@ -6,10 +6,10 @@ package pakovankilasta;
  */
 public class Rivi {
 
-    protected int koko;
-    protected int riviNro;  //Alkaako numerointi venepäädystä vai vankilasta
-    protected Ruutu[] ruudut; //ArrayList tai vastaava?
-    protected Vartija vartija;
+    private int koko;
+    private int riviNro;  //Alkaako numerointi venepäädystä vai vankilasta
+    private Ruutu[] ruudut; //ArrayList tai vastaava?
+    private Vartija vartija;
 
     public Rivi(int koko, int nro) {
 
@@ -28,12 +28,30 @@ public class Rivi {
      *
      * @param ruudut Rivin muodostava Ruutujen taulukko
      */
-    private void luoRuudut(Ruutu[] ruudut) { //private?
-        //mahdolliset Pakoruudut?
+    private void luoRuudut(Ruutu[] ruudut) {
         
-        for(int i=0; i < ruudut.length; i++) {
-            ruudut[i] = new Ruutu(i, this.riviNro);
+        int kanta = ruudut.length/2; //Lasketaan pakoruutukolmion kanta
+        if(kanta%2 == 0){
+            kanta++;
         }
+        
+        if((kanta-2*(ruudut.length-this.riviNro)) > 0) { //
+            for(int i=0; i < ruudut.length; i++){
+                if(i < ((ruudut.length-(kanta-2*(ruudut.length-this.riviNro)))/2)) {
+                    ruudut[i] = new Ruutu(i, this.riviNro, false);
+                } else if(i >= ((ruudut.length-(kanta-2*(ruudut.length-this.riviNro)))/2)+(kanta-2*(ruudut.length-this.riviNro))) {
+                    ruudut[i] = new Ruutu(i, this.riviNro, false);
+                } else {
+                    ruudut[i] = new Ruutu(i, this.riviNro, true);
+                }
+            }
+                
+        } else {
+            for(int i=0; i < ruudut.length; i++){
+                ruudut[i] = new Ruutu(i, this.riviNro, false);
+            }
+        }
+        
     }
 
     /**
@@ -48,7 +66,7 @@ public class Rivi {
      */
     public void asetaVartija() {
 
-        if (this.riviNro > 0) { //Jos ensimmäinen rivi (kauimpana venettä) ei riville tule Vartijaa
+        if (this.riviNro > 0) { 
             int ruutuNro;
             if ((this.riviNro) % 2 == 1) {
                 ruutuNro = ruudut.length - ((this.riviNro / 2) + 1);
@@ -59,29 +77,12 @@ public class Rivi {
                 this.vartija = new Vartija(ruudut[ruutuNro]);
                 ruudut[ruutuNro].setNappula(this.vartija);
             }           
+        } else {
+            this.vartija = null; //Ensimmäiselle riville (kauimpana venettä) ei tule Vartijaa.
         }
 
     }
     
-//    /**
-//     * getRuutu antaa parametrina annetun Ruudun
-//     *
-//     * @param sarake Halutun Ruudun numero Rivillä
-//     * @return Haluttu Ruutu
-//     */
-//    public Ruutu getRuutu(int sarake) {
-//        return ruudut[sarake];
-//    }
-//    
-//    //Tarvitaanko?
-//    /**
-//     * getKoko antaa rivin koon.
-//     *
-//     * @return rivin koko
-//     */
-//    public int getKoko() {
-//        return koko;
-//    }
 
     /**
      * getRiviNro-metodi antaa rivin järjestysnumeron vankilan pihasta.
