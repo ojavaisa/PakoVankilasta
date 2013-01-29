@@ -5,3 +5,4 @@ ke 23.1.	8h: Esitietokurssien kertausta, Rivi-luokka, Pelilauta-luokka, pääohj
 				Pelilaudan (ja sitä kautta Rivin ja Ruudun) tulostus, Vartija-luokka, Vartijoiden alkuasettelu
 				Vanki-luokka, Pakoruutu-luokka, pelinappuloiden liikuttelulogiikan aloitus
 to 24.1.	4h: Pajaohjaus, Ruutu-luokan uudelleen miettiminen
+ma 28.1.	2h: Pakoruutu luokasta Ruudun attribuutiksi, Pakokolmion laskeminen, nappuloiden liikkumislogiikkaa
