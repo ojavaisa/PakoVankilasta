@@ -11,6 +11,9 @@ public class Vanki extends Pelinappula {
     }
     
     public void takaisinSelliin() {
+        
+        Ruutu ruutu = this.sijainti;
+        ruutu.setNappulaNull();
         this.sijainti = null;
     }
     

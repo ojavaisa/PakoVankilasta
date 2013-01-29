@@ -5,15 +5,13 @@ package pakovankilasta;
  * @author $Olli Väisänen
  */
 public class Rivi {
-
-    private int koko;
+    
     private int riviNro;  //Alkaako numerointi venepäädystä vai vankilasta
     private Ruutu[] ruudut; //ArrayList tai vastaava?
     private Vartija vartija;
 
     public Rivi(int koko, int nro) {
 
-        this.koko = koko;
         this.riviNro = nro;
         this.ruudut = new Ruutu[koko];
         luoRuudut(ruudut); //luodaan ruudut omassa metodissaan
@@ -21,8 +19,8 @@ public class Rivi {
     }
 
     /**
-     * luoRuudut-metodi on konstruktorin käyttämä ruudut-muuttujassa
-     * (Ruudut[koko]) olevat tyhjät Ruudut
+     * luoRuudut-metodi on konstruktorin käyttämä metodi joka luo ruudut-muuttujassa
+     * olevat tyhjät Ruudut, sekä määrittää pakoruutujen paikat.
      *
      * @see pakovankilasta.Ruutu
      *
@@ -92,6 +90,16 @@ public class Rivi {
     public int getRiviNro() {
         return riviNro;
     }
+    
+    public int getKoko() {
+        return this.ruudut.length;
+    }
+    
+    public Ruutu getRuutu(int sarakeNro) {
+        return this.ruudut[sarakeNro];
+    }
+    
+    //getVartija?
     
     @Override
     public String toString(){

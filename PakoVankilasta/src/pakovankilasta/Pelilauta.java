@@ -99,7 +99,6 @@ public class Pelilauta {
         return true;
     }
     
-    //Tarvitaanko?
     /**
      * getRivi antaa parametrina annetun Rivin
      *
@@ -108,6 +107,16 @@ public class Pelilauta {
      */
     public Rivi getRivi(int rivi) {
         return rivit[rivi];
+    }
+    
+    /**
+     * getKoko-metodi palauttaa pelilaudan korkeuden eli Rivien lukumäärä. 
+     * Huom! korkeus = leveys + 1 
+     * 
+     * @return Pelilaudan korkeus eli Rivien lukumäärä.
+     */
+    public int getKoko() {
+        return this.rivit.length;
     }
 
     @Override

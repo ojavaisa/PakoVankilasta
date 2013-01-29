@@ -31,8 +31,8 @@ public class RuutuTest {
     public void setUp() {
         nappula1 = new Pelinappula();
         nappula2 = new Pelinappula();
-        ruutuTyhja = new Ruutu();
-        ruutuNappula = new Ruutu();
+        ruutuTyhja = new Ruutu(1,1,false);
+        ruutuNappula = new Ruutu(2,1,false);
         ruutuNappula.setNappula(nappula1);
     }
     

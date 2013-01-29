@@ -31,15 +31,13 @@ public class PelinappulaTest {
     public void setUp() {
         nappula1 = new Pelinappula();
         nappula2 = new Pelinappula();
-        ruutu1 = new Ruutu();
-        ruutu2 = new Ruutu();
+        ruutu1 = new Ruutu(1,1,false);
+        ruutu2 = new Ruutu(2,1,false);
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
     
     /**
      * Pelinappula-luokan getSijainti-metodin testaus ruuduttomalla nappulalla
@@ -118,9 +116,9 @@ public class PelinappulaTest {
         Pelinappula tulos2 = ruutu1.getNappula();
         assertEquals(oikea2, tulos2);
         
-        Ruutu oikea3 = null;
-        Ruutu tulos3 = nappula2.getSijainti();
-        assertEquals(oikea3, tulos3);
+        oikea1 = null;
+        tulos1 = nappula2.getSijainti();
+        assertEquals(oikea1, tulos1);
     }
 
     

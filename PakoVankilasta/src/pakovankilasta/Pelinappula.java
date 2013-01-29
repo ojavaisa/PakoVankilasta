@@ -45,15 +45,6 @@ public class Pelinappula {
     public Pelinappula() {
         this.sijainti = null;
     }
-    
-    //Tarvitaanko tätä Vartijoille?
-    /**
-     * Konstruktori aloitusruudussa sijaitsevan pelinappulan luomiseen (Vartijat)
-     * 
-     * @param sijainti pelinappulan aloitusruutu
-     */
-    public Pelinappula(Ruutu sijainti) {
-        this.sijainti = sijainti;
-    }
+
         
 }

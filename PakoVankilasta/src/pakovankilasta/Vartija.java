@@ -9,8 +9,15 @@ public class Vartija extends Pelinappula {
     //attribuuttina Rivi, jolle Vartija kuuluu?
     //protected Rivi rivi;
     
+    /**
+     * Konstruktori aloitusruudussa sijaitsevan Vartijan luomiseen.
+     * Kaikki Vartijat luodaan aloitusruutuihinsa.
+     *
+     * @param sijainti pelinappulan aloitusruutu
+     */
     public Vartija(Ruutu sijainti) {
-        super(sijainti);
+        this.sijainti = sijainti;
+        sijainti.setNappula(this);
     }
 
     @Override
