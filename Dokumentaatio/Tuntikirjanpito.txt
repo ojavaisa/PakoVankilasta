@@ -7,3 +7,4 @@ ke 23.1.	8h: Esitietokurssien kertausta, Rivi-luokka, Pelilauta-luokka, pääohj
 to 24.1.	4h: Pajaohjaus, Ruutu-luokan uudelleen miettiminen
 ma 28.1.	2h: Pakoruutu luokasta Ruudun attribuutiksi, Pakokolmion laskeminen, nappuloiden liikkumislogiikkaa
 ti 29.1.	3h: Testiluokat PelilautaTest, RiviTest, VankiTest ja VartijaTest luotu. Testejä.
+ke 30.1.	4h: Pelaaja-luokka. Pelinappuloiden liikuttelutarkistuksia.

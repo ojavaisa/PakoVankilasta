@@ -21,18 +21,36 @@ public class PakoVankilasta {
     
     public static void main(String[] args) {
         
-        int koko; //pelaajat
+        int lkm; 
         //char vinkit;
         Pelilauta lauta;
+        Pelaaja[] pelaajat;
+        boolean kesken = true;
         
         System.out.println("Pako vankilasta\n" + 
                            "===============\n\n");
-        System.out.println("Anna pelilaudan koko. Koko on pariton kokonaisluku väliltä 5-15.");
-        koko = kokonaisluku();
-        koko = laudanKoko(koko);
         
-        lauta = new Pelilauta(koko);
-        System.out.println(lauta);
+        //koko = laudanKoko();
+        lauta = new Pelilauta(laudanKoko());
+        
+        lkm = pelaajienLkm();
+        pelaajat = new Pelaaja[lkm];
+        for(int i=0; i<lkm; i++){
+            pelaajat[i] = new Pelaaja();
+        }
+        
+//        do {
+//            for(int i=0; i<lkm; i++){
+//                System.out.println(lauta);
+//                if(pelaajat[i].laudalla() == 0) {
+//                    System.out.println("Anna ruutu johon siirrät uuden vangin.\n");
+//                }
+//            }
+//            
+//            
+//            
+//        } while(kesken);
+        
         
     }
     
@@ -56,7 +74,12 @@ public class PakoVankilasta {
         return luku;
     }    
     
-    private static int laudanKoko(int koko) {
+    private static int laudanKoko() {
+        
+        int koko;
+        
+        System.out.println("Anna pelilaudan koko. Koko on pariton kokonaisluku väliltä 5-15.");
+        koko = kokonaisluku();
         
         if(koko<5 || koko>15){ 
             System.out.println("Annoit virheellisen laudan koon. \n" +
@@ -70,6 +93,22 @@ public class PakoVankilasta {
             System.out.println("Laudan koko on (" +koko+ "x" +(koko+1)+ ").\n");
         }
         return koko;
+    }
+    
+    private static int pelaajienLkm() {
+        
+        int luku;
+        
+        do {
+            System.out.println("Anna pelaajien lukumäärä 2-4.");
+            luku = kokonaisluku();
+            if(luku < 2 || luku > 4){
+                System.out.println("Syötit virheellisen pelaajien lukumäärän. Yritä uudelleen.\n");
+            } 
+        } while(luku < 2 || luku > 4);
+        
+        return luku;
+ 
     }
     
 }

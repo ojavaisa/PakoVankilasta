@@ -21,11 +21,11 @@ public class Ruutu {
     }
     
     /**
-     * getRivi-metodi antaa Ruudun rivinumeron.
+     * getRiviNro-metodi antaa Ruudun rivinumeron.
      *
      * @return Ruudun rivin numero
      */
-    public int getRivi() {
+    public int getRiviNro() {
         return riviNro;
     }
     

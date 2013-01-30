@@ -99,7 +99,9 @@ public class Rivi {
         return this.ruudut[sarakeNro];
     }
     
-    //getVartija?
+    public Vartija getVartija() {
+        return this.vartija;
+    }
     
     @Override
     public String toString(){
