@@ -30,7 +30,21 @@ public class Pelaaja {
         }
     }
     
-    protected boolean voittaunut() {
+//    protected boolean kaikkiLaudalla() {
+//        int laudalla=0;
+//        for(int i=0; i<4; i++){
+//            if(laudalla(i)){
+//                laudalla++;
+//            }
+//        }
+//        if(laudalla==4) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+    
+    protected int veneessa() {
         
         int veneessa = 0;
         for(int i=0; i<4; i++){
@@ -38,7 +52,7 @@ public class Pelaaja {
                 veneessa++;
             }
         }
-        return (veneessa >= 3);
+        return veneessa;
     }
 
 }

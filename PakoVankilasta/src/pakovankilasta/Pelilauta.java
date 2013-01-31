@@ -51,7 +51,10 @@ public class Pelilauta {
      * @param rivi
      * @return
      */
-    protected boolean siirtoSallittu(Vanki vanki, int sarake, int rivi) {
+    protected boolean siirtoSallittu(Vanki vanki, Ruutu kohde) {
+        
+        int rivi = kohde.getRiviNro();
+        int sarake = kohde.getSarake();
 
         if (rivi == 0 || vanki.getSijainti() == null) {
             return true;
@@ -74,13 +77,16 @@ public class Pelilauta {
      * @param rivi kohteena olevan Ruudun rivinumero
      * @return totuusarvo true, jos edessä ei ole vartijoita
      */
-    protected boolean reittiVapaa(Vanki vanki, int sarake, int rivi) {
+    protected boolean reittiVapaa(Vanki vanki, Ruutu kohde) {
 
+        int rivi = kohde.getRiviNro();
+        int sarake = kohde.getSarake();
+        
         if (this.rivit[rivi].getRuutu(sarake).getNappula() != null) {
             return false;
         } else {
             if (vanki.getSijainti() == null) {
-                return aloitusSiirto(vanki, sarake, rivi);
+                return aloitusSiirto(kohde);
             } else if (vanki.getSijainti().getSarake() == sarake) {
                 return sarakeSiirto(vanki, rivi);
             } else if (vanki.getSijainti().getRiviNro() == rivi) {
@@ -93,8 +99,11 @@ public class Pelilauta {
 
     }
 
-    private boolean aloitusSiirto(Vanki vanki, int sarake, int rivi) {
+    private boolean aloitusSiirto(Ruutu kohde) {
 
+        int rivi = kohde.getRiviNro();
+        int sarake = kohde.getSarake();
+        
         for (int i = 1; i <= rivi; i++) { //Rivillä 0 ei ole Vartijaa!
             if (rivit[i].getVartija().getSijainti().getSarake() == sarake) {
                 return false;
