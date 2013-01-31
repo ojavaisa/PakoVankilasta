@@ -8,7 +8,7 @@ package pakovankilasta;
  */
 public class Pelinappula {
     
-    protected Ruutu sijainti;
+    private Ruutu sijainti;
 
     /**
      * getSijainti palauttaa Pelinappulan sijainnin (Ruudun)
@@ -17,6 +17,14 @@ public class Pelinappula {
      */
     public Ruutu getSijainti() {
         return sijainti;
+    }
+    
+    protected void setSijainti(Ruutu ruutu) {
+        this.sijainti = ruutu;
+    }
+    
+    protected void setSijaintiNull() {
+        this.sijainti = null;
     }
     
     /**

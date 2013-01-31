@@ -16,16 +16,19 @@ public class Vartija extends Pelinappula {
      * @param sijainti pelinappulan aloitusruutu
      */
     public Vartija(Ruutu sijainti) {
-        this.sijainti = sijainti;
-        sijainti.setNappula(this);
+        this.setSijainti(sijainti);
     }
+    
+//    protected void setRivi(Rivi rivi) {
+//        this.rivi = rivi;
+//    }
 
     @Override
     public void liiku(Ruutu kohde) {
         
-        this.sijainti.setNappulaNull();
+        this.getSijainti().setNappulaNull();
         kohde.setNappula(this);
-        this.sijainti = kohde;
+        this.setSijainti(kohde);
        
     }
     

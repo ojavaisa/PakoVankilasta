@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pakovankilasta;
 
 /**
  *
- * @author Olli
+ * @author Olli Väisänen
  */
 
 import java.util.Scanner;
@@ -18,12 +14,12 @@ public class PakoVankilasta {
      */
     
     private static Scanner lukija = new Scanner(System.in);
+    private static Pelilauta lauta;
     
     public static void main(String[] args) {
         
         int lkm; 
         //char vinkit;
-        Pelilauta lauta;
         Pelaaja[] pelaajat;
         boolean kesken = true;
         
@@ -109,6 +105,36 @@ public class PakoVankilasta {
         
         return luku;
  
+    }
+    
+    private static boolean siirto(Vanki vanki, int sarake, int rivi) {
+        
+        if(lauta.siirtoSallittu(vanki, sarake, rivi)) {
+            if(lauta.reittiVapaa(vanki, sarake, rivi)) {
+                if(rivi>0){
+                    if(lauta.getRivi(rivi).vartijaEiSyo(vanki, sarake)){
+                        vanki.liiku(lauta.getRivi(rivi).getRuutu(sarake));
+                        lauta.getRivi(rivi).liikutaVartijaa(vanki, sarake);
+                        return true;
+                    } else {
+                        System.out.println("Siirto ei onnistu, vankisi jäisi kiinni! Yritä uudelleen.\n");
+                        return false;
+                    }
+                } else { //rivi==0
+                    vanki.liiku(lauta.getRivi(rivi).getRuutu(sarake));
+                    return true;
+                }
+                
+            } else {
+                System.out.println("Siirto ei onnistu, tiellä on vartijoita! Yritä uudelleen.\n");
+                return false;
+            }
+        
+        } else {
+            System.out.println("Siirto ei ole vaaka- tai pystysuoraan! Yritä uudelleen.\n");
+            return false;
+        }
+        
     }
     
 }

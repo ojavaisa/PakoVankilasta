@@ -65,6 +65,7 @@ public class Ruutu {
      * setNappulaNull-metodi tyhjentää ruudun (asettaa Ruudun Pelinappulan arvoksi null).
      */
     public void setNappulaNull() {
+        this.nappula.setSijaintiNull();
         this.nappula = null;
     }
 

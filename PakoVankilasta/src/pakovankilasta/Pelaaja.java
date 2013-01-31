@@ -15,20 +15,19 @@ public class Pelaaja {
         this.vangit = new Vanki[4];
         for(int i=0; i<4; i++) {
             this.vangit[i] = new Vanki();
+            this.vangit[i].setPelaaja(this);
         }
     }
     
-    protected int laudalla() {
+    protected boolean laudalla(int vanginNro) {
         
-        int laudalla = 4;
-        for(int i=0; i<4; i++){
-            if(this.vangit[i] == null){
-                laudalla--;
-            } else if(this.vangit[i].getSijainti() == null){
-                laudalla--;
-            }
+        if(this.vangit[vanginNro] == null){
+            return false;
+        } else if(this.vangit[vanginNro].getSijainti() == null) {
+            return false;
+        } else {
+            return true;
         }
-        return laudalla;
     }
     
     protected boolean voittaunut() {

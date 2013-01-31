@@ -2,9 +2,9 @@ package pakovankilasta;
 
 /**
  * Pelilauta-luokka muodostaa pelin laudan. Pelilauta koostuu Riveistä.
- * Pelilaudan leveyden määrittää käyttäjän antama parametri koko. Laudan
- * korkeus on koko+1. //Blaa blaa, jotain laudan muodosta, pakoruuduista ja vartijoista? 
- * 
+ * Pelilaudan leveyden määrittää käyttäjän antama parametri koko. Laudan korkeus
+ * on koko+1. //Blaa blaa, jotain laudan muodosta, pakoruuduista ja vartijoista?
+ *
  * @see pakovankilasta.Rivi
  *
  * @author $Olli Väisänen
@@ -13,18 +13,19 @@ public class Pelilauta {
 
     private int leveys;
     private Rivi[] rivit; //ArrayList tai vast?
-    
+
     public Pelilauta(int koko) {
 
         this.leveys = koko;
 
-        this.rivit = new Rivi[this.leveys+1]; //Laudan korkeus on leveys+1
+        this.rivit = new Rivi[this.leveys + 1]; //Laudan korkeus on leveys+1
         luoRivit(rivit);
     }
-    
+
     /**
-     * luoRivit-metodi on konstruktorin käyttämä metodi, joka luo rivit-muuttujassa
-     * (Rivi[koko]) olevat Rivit ja asettaa niihin Vartijat (Rivi-luokan metodilla asetaVartija).
+     * luoRivit-metodi on konstruktorin käyttämä metodi, joka luo
+     * rivit-muuttujassa (Rivi[koko]) olevat Rivit ja asettaa niihin Vartijat
+     * (Rivi-luokan metodilla asetaVartija).
      *
      * @see pakovankilasta.Rivi
      * @see pakovankilasta.Rivi#asetaVartija(int)
@@ -33,66 +34,57 @@ public class Pelilauta {
      */
     private void luoRivit(Rivi[] rivit) {
 
-        for(int i=0; i < rivit.length; i++){
-            rivit[i] = new Rivi(this.leveys,i);
+        for (int i = 0; i < rivit.length; i++) {
+            rivit[i] = new Rivi(this.leveys, i);
         }
-        for(int i=0; i < rivit.length; i++){ 
+        for (int i = 0; i < rivit.length; i++) {
             rivit[i].asetaVartija();
         }
     }
-    
+
     /**
-     * siirtoSallittu tarkistaa että siirto on joko vaakasuoraan tai pystysuoraan
-     * 
+     * siirtoSallittu tarkistaa että siirto on joko vaakasuoraan tai
+     * pystysuoraan
+     *
      * @param vanki
      * @param sarake
      * @param rivi
-     * @return 
+     * @return
      */
-    protected boolean siirtoSallittu(Vanki vanki, int sarake, int rivi){
-        
-        if(rivi == 0 || vanki.getSijainti() == null) {
+    protected boolean siirtoSallittu(Vanki vanki, int sarake, int rivi) {
+
+        if (rivi == 0 || vanki.getSijainti() == null) {
             return true;
-        } else if(vanki.getSijainti().getRiviNro() == rivi) {
+        } else if (vanki.getSijainti().getRiviNro() == rivi) {
             return true;
-        } else if(vanki.getSijainti().getSarake() == sarake) {
+        } else if (vanki.getSijainti().getSarake() == sarake) {
             return true;
         } else {
             return false;
         }
     }
-    
-    
 
-    //Erillinen metodi tarkistaa, että kohteena olevan Rivin Vartija ei syö pelaajan omia nappuloita.
-    //vartijaEiSyo Esim. Pelaajan tai Rivin metodi???
-//    protected boolean vartijaEiSyo(Vanki vanki, int sarake, int rivi) {
-//        
-//    }
-    
+
     /**
-     * reittiVapaa tarkistaa että kohteena oleva Ruutu on vapaa ja ettei siirron tiellä ole Vartijoita
-     * 
+     * reittiVapaa tarkistaa että kohteena oleva Ruutu on vapaa ja ettei siirron
+     * tiellä ole Vartijoita
+     *
      * @param vanki Vanki, jota halutaan liikuttaa
      * @param sarake kohteena olevan Ruudun sarakeen numero
      * @param rivi kohteena olevan Ruudun rivinumero
      * @return totuusarvo true, jos edessä ei ole vartijoita
      */
     protected boolean reittiVapaa(Vanki vanki, int sarake, int rivi) {
-        
-        if(this.rivit[rivi].getRuutu(sarake).getNappula() != null) {
+
+        if (this.rivit[rivi].getRuutu(sarake).getNappula() != null) {
             return false;
         } else {
-            if(vanki.getSijainti() == null) {
-                for(int i=0; i<=rivi; i++){
-                    if(rivit[i].getRuutu(sarake).getNappula() == rivit[i].getVartija()) {
-                        return false;
-                    }
-                }
-            } else if(vanki.getSijainti().getSarake() == sarake) {
-                return reittiSarakkeella(vanki, sarake, rivi);
-            } else if(vanki.getSijainti().getRiviNro() == rivi) {
-                return reittiRivilla(vanki, sarake, rivi);
+            if (vanki.getSijainti() == null) {
+                return aloitusSiirto(vanki, sarake, rivi);
+            } else if (vanki.getSijainti().getSarake() == sarake) {
+                return sarakeSiirto(vanki, rivi);
+            } else if (vanki.getSijainti().getRiviNro() == rivi) {
+                return riviSiirto(vanki, sarake);
             } else {
                 System.out.println("You're not supposed to get here!");
                 return false;
@@ -100,30 +92,66 @@ public class Pelilauta {
         }
 
     }
-    
-    private boolean reittiSarakkeella(Vanki vanki, int sarake, int rivi) {
-        
-        if(vanki.getSijainti().getRiviNro() < rivi){
-            for(int i=vanki.getSijainti().getRiviNro(); i<=rivi; i++) {
-                if(rivit[i].getRuutu(sarake).getNappula() == rivit[i].getVartija()) {
-                        return false;
-                } 
-            } 
+
+    private boolean aloitusSiirto(Vanki vanki, int sarake, int rivi) {
+
+        for (int i = 1; i <= rivi; i++) { //Rivillä 0 ei ole Vartijaa!
+            if (rivit[i].getVartija().getSijainti().getSarake() == sarake) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    private boolean sarakeSiirto(Vanki vanki, int rivi) {
+
+        int lahtoRivi = vanki.getSijainti().getRiviNro();
+        int sarake = vanki.getSijainti().getSarake();
+        int vartijanSarake;
+
+        if (lahtoRivi < rivi) {
+            for (int i = lahtoRivi; i <= rivi; i++) {
+                vartijanSarake = rivit[i].getVartija().getSijainti().getSarake();
+                if (vartijanSarake == sarake) {
+                    return false;
+                }
+            }
             return true;
-        } else {
-            for(int i=vanki.getSijainti().getRiviNro(); i>=rivi; i--) {
-                if(rivit[i].getRuutu(sarake).getNappula() == rivit[i].getVartija()) {
-                        return false;
-                } 
+        } else { //lahtoRivi > rivi (lahtoRivi == rivi)-tapaus käsitellään muualla?
+            for (int i = lahtoRivi; i >= rivi; i--) {
+                vartijanSarake = rivit[i].getVartija().getSijainti().getSarake();
+                if (vartijanSarake == sarake) {
+                    return false;
+                }
             }
             return true;
         }
     }
-    
-    private boolean reittiRivilla(Vanki vanki, int sarake, int rivi) { //Jatka tästä!
-        return true;
+
+    private boolean riviSiirto(Vanki vanki, int sarake) {
+
+        int lahtoSarake = vanki.getSijainti().getSarake();
+        int rivi = vanki.getSijainti().getRiviNro();
+        int vartijanSarake = rivit[rivi].getVartija().getSijainti().getSarake();
+
+        if (lahtoSarake < sarake) {
+            for (int i = lahtoSarake; i <= sarake; i++) {
+                if (vartijanSarake == i) {
+                    return false;
+                }
+            }
+            return true;
+        } else { //lahtoSarake > sarake (lahtoSarake == sarake)-tapaus käsitellään muualla?
+            for (int i = lahtoSarake; i >= sarake; i--) {
+                if (vartijanSarake == i) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
-    
+
     /**
      * getRiviNro antaa parametrina annetun Rivin
      *
@@ -133,11 +161,11 @@ public class Pelilauta {
     public Rivi getRivi(int rivi) {
         return rivit[rivi];
     }
-    
+
     /**
-     * getKoko-metodi palauttaa pelilaudan korkeuden eli Rivien lukumäärä. 
-     * Huom! korkeus = leveys + 1 
-     * 
+     * getKoko-metodi palauttaa pelilaudan korkeuden eli Rivien lukumäärä. Huom!
+     * korkeus = leveys + 1
+     *
      * @return Pelilaudan korkeus eli Rivien lukumäärä.
      */
     public int getKoko() {
@@ -145,21 +173,20 @@ public class Pelilauta {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
 
         String lauta = "    ";
-        
-        for(int i=0; i<this.leveys; i++){
+
+        for (int i = 0; i < this.leveys; i++) {
             int kirjain = 'A';
-            kirjain+=i;
-            lauta = lauta + (char) kirjain +" ";
+            kirjain += i;
+            lauta = lauta + (char) kirjain + " ";
         }
         lauta = lauta + "\n";
 
-        for(int i=rivit.length-1; i>=0; i--){
+        for (int i = rivit.length - 1; i >= 0; i--) {
             lauta = lauta + rivit[i] + "\n";
         }
         return lauta;
-    }    
-    
+    }
 }

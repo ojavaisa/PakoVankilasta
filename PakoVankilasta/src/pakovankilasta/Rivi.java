@@ -4,6 +4,7 @@ package pakovankilasta;
  *
  * @author $Olli Väisänen
  */
+
 public class Rivi {
     
     private int riviNro;  //Alkaako numerointi venepäädystä vai vankilasta
@@ -70,15 +71,79 @@ public class Rivi {
                 ruutuNro = ruudut.length - ((this.riviNro / 2) + 1);
                 this.vartija = new Vartija(ruudut[ruutuNro]);
                 ruudut[ruutuNro].setNappula(this.vartija);
+                //this.vartija.setRivi(this);
             } else {
                 ruutuNro = (this.riviNro / 2) - 1;
                 this.vartija = new Vartija(ruudut[ruutuNro]);
                 ruudut[ruutuNro].setNappula(this.vartija);
+                //this.vartija.setRivi(this);
             }           
         } else {
             this.vartija = null; //Ensimmäiselle riville (kauimpana venettä) ei tule Vartijaa.
         }
 
+    }
+    
+    //Tarkistaa tällä hetkellä vain että juuri liikkunutta Vankia ei syödä! pitää tarkistaa vielä muut saman pelaajan vangit!
+    protected boolean vartijaEiSyo(Vanki vanki, int sarake) {
+        
+        int vartijanSarake = this.vartija.getSijainti().getSarake();
+        if(sarake > vartijanSarake) {
+            if((vartijanSarake+siirronPituus(vanki, sarake))>=sarake) {
+                return false;
+            } else { //vartijanSarake + siirronPituus < sarake
+                return true;
+            }
+        } else { //sarake < vartijanSarake
+            if((vartijanSarake-siirronPituus(vanki, sarake))<=sarake) {
+                return false;
+            } else { //vartijanSarake - siirronPituus > sarake
+                return true;
+            }
+        }
+        
+    }
+    
+    int siirronPituus(Vanki vanki, int sarake){
+        
+        if(vanki.getSijainti()==null){
+            return (this.riviNro+1);
+        } else if(vanki.getSijainti().getRiviNro()==this.riviNro){
+            if(sarake - vanki.getSijainti().getSarake()>=0) {
+                return (sarake - vanki.getSijainti().getSarake());
+            } else {
+                return (vanki.getSijainti().getSarake() - sarake);
+            }
+        } else { //Liikutaan sarakkeella
+            if(this.riviNro - vanki.getSijainti().getRiviNro()>=0) {
+                return (this.riviNro - vanki.getSijainti().getRiviNro());
+            } else {
+                return (vanki.getSijainti().getRiviNro() - this.riviNro);
+            }
+        }
+    }
+    
+    protected void liikutaVartijaa(Vanki vanki, int sarake) {
+        
+        int vanha = this.vartija.getSijainti().getSarake();
+        int uusi;
+        if (sarake > vanha) {
+            uusi = vanha+siirronPituus(vanki,sarake);
+            for(int i=vanha; i<=uusi; i++){ //Tarkistetaan matkan varrella olevat Vangit
+                if(this.ruudut[i].getNappula()!=null){
+                    this.ruudut[i].setNappulaNull();
+                }
+            }
+            this.vartija.liiku(this.ruudut[uusi]);
+        } else { //sarake < vanha
+            uusi = vanha-siirronPituus(vanki,sarake);
+            for(int i=vanha; i>=uusi; i--){ //Tarkistetaan matkan varrella olevat Vangit
+                if(this.ruudut[i].getNappula()!=null){
+                    this.ruudut[i].setNappulaNull();
+                }
+            }
+            this.vartija.liiku(this.ruudut[uusi]);
+        }
     }
     
 
