@@ -17,6 +17,8 @@ import static org.junit.Assert.*;
  */
 public class PelaajaTest {
     
+    Pelaaja pelaaja;
+    
     public PelaajaTest() {
     }
     
@@ -30,14 +32,24 @@ public class PelaajaTest {
     
     @Before
     public void setUp() {
+        pelaaja = new Pelaaja();
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+
+    /**
+     * laudalla-metodin testaus Vangeille, jotka eivät ole laudalla
+     */
+    @Test
+    public void testLaudallaNull() {
+        
+        boolean oikea = false;
+        boolean tulos;
+        for(int i=0; i<4; i++){
+            tulos = pelaaja.laudalla(i);
+            assertEquals(oikea, tulos);
+        }
+    }
 }

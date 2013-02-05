@@ -46,7 +46,7 @@ public class PakoVankilasta {
                 
             }
             
-            
+            kesken = false;
             
         } while(kesken);
         

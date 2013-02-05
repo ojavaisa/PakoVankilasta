@@ -19,6 +19,7 @@ public class Pelinappula {
     }
     
     protected void setSijainti(Ruutu ruutu) {
+        ruutu.setNappula(this);
         this.sijainti = ruutu;
     }
     
@@ -44,7 +45,7 @@ public class Pelinappula {
             }
             kohde.setNappula(this);
             this.sijainti = kohde;
-        } else { //Myöhemmin käyttöliittymässä!!
+        } else { //Tänne ei pitäisi päästä jos tarkistukset menee oikein.
             System.out.println("Ruudussa on jo nappula!");
         }
 

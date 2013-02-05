@@ -77,20 +77,9 @@ public class RuutuTest {
      * Ruutu-luokan setNappula-metodin testaus arvolla null
      */
     @Test
-    public void testSetNappulaTyhjaksi() {
-        ruutuNappula.setNappula(null);
-        Pelinappula oikea = nappula1;
-        Pelinappula tulos = ruutuNappula.getNappula();
-        assertEquals(oikea, tulos);
-    }
-    
-    /**
-     * Ruutu-luokan setNappula-metodin testaus, nappulan lisääminen täyteen ruutuun
-     */
-    @Test
-    public void testSetNappulaTayteen() {
-        ruutuNappula.setNappula(nappula2);
-        Pelinappula oikea = nappula1;
+    public void testSetNappulaNull() {
+        ruutuNappula.setNappulaNull();
+        Pelinappula oikea = null;
         Pelinappula tulos = ruutuNappula.getNappula();
         assertEquals(oikea, tulos);
     }

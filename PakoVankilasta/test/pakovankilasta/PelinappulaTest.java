@@ -121,5 +121,22 @@ public class PelinappulaTest {
         assertEquals(oikea1, tulos1);
     }
 
-    
+    /**
+     * setSijaintiNull-metodin testaus
+     */
+    @Test
+    public void testSetSijaintiNull() {
+        
+        Ruutu oikea, tulos;
+        
+        oikea = ruutu1;
+        nappula1.setSijainti(ruutu1);
+        tulos = nappula1.getSijainti();
+        assertEquals(oikea, tulos);
+        
+        oikea = null;
+        nappula1.setSijaintiNull();
+        tulos = nappula1.getSijainti();
+        assertEquals(oikea, tulos);
+    }
 }

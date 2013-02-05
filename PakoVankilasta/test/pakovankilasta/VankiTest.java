@@ -151,7 +151,7 @@ public class VankiTest {
      * 
      */
     @Test
-    public void testLiikuVartijaan() { 
+    public void testLiikuVartijaan() {
         vanki1.liiku(ruutuVartija);
         
         Ruutu oikea1 = null;
@@ -178,4 +178,5 @@ public class VankiTest {
 //        Pelinappula tulos2 = ruutu1.getNappula();
 //        assertEquals(oikea2, tulos2);
 //    }
+    //Ennemminkin testi setSijaintiNull()??? (tai jotain?)
 }

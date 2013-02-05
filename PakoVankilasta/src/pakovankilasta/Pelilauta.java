@@ -57,6 +57,7 @@ public class Pelilauta {
      * @param kohde kohteena oleva Ruutu, johon ollaan siirtymässä
      * @return totuusarvo, siitä onko siirto sallittu
      */
+    //Siirtyminen samaan ruutuun??? Tässä tarkistus? (lisää myös testiin jos näin)
     protected boolean siirtoSallittu(Vanki vanki, Ruutu kohde) {
         
         int rivi = kohde.getRiviNro();
@@ -142,6 +143,9 @@ public class Pelilauta {
         int vartijanSarake;
 
         if (lahtoRivi < rivi) {
+            if(lahtoRivi == 0) {
+                lahtoRivi++; //Riviä 0 ei tarvitse tarkistaa
+            }
             for (int i = lahtoRivi; i <= rivi; i++) {
                 vartijanSarake = rivit[i].getVartija().getSijainti().getSarake();
                 if (vartijanSarake == sarake) {
@@ -150,6 +154,9 @@ public class Pelilauta {
             }
             return true;
         } else { //lahtoRivi > rivi (lahtoRivi == rivi)-tapaus käsitellään muualla?
+            if(rivi == 0) {
+                rivi++; //Riviä 0 ei tarvitse tarkistaa
+            }
             for (int i = lahtoRivi; i >= rivi; i--) {
                 vartijanSarake = rivit[i].getVartija().getSijainti().getSarake();
                 if (vartijanSarake == sarake) {

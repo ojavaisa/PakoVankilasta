@@ -44,17 +44,14 @@ public class Ruutu {
     }
 
     /**
-     * setNappula-metodi asettaa ruutuun pelinappulan.
-     * //Antaa virheilmoituksen, jos siirto ei onnistu (ruudussa on jo nappula).
+     * setNappula-metodi asettaa Ruudun pelinappulan.
      *
      * @param nappula nappula-muuttujan uusi arvo
      */
-    public void setNappula(Pelinappula nappula) { //Entä kun ruutuun siirtyy vartija?
-        if(this.nappula == null) {
-            this.nappula = nappula;
-        } else {  //Myöhemmin käyttöliittymässä!!!
-            System.out.println("Siirto ei onnistu!");
-        }
+    //HUOMHUOM! Nyt asettaa nappulan joka tapauksessa! Asettamisen sallimistarkastus jossain muualla!
+    public void setNappula(Pelinappula nappula) { 
+        
+        this.nappula = nappula;
     }
 
     /**
