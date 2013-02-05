@@ -164,18 +164,18 @@ public class VankiTest {
 
     }    
     
-    @Test
-    public void testTakaisinSelliin(){
-        
-        vanki1.liiku(ruutu1);
-        vanki1.takaisinSelliin();
-        
-        Ruutu oikea1 = null;
-        Ruutu tulos1 = vanki1.getSijainti();
-        assertEquals(oikea1, tulos1);
-        
-        Pelinappula oikea2 = null;
-        Pelinappula tulos2 = ruutu1.getNappula();
-        assertEquals(oikea2, tulos2);
-    }
+//    @Test
+//    public void testTakaisinSelliin(){
+//        
+//        vanki1.liiku(ruutu1);
+//        vanki1.takaisinSelliin();
+//        
+//        Ruutu oikea1 = null;
+//        Ruutu tulos1 = vanki1.getSijainti();
+//        assertEquals(oikea1, tulos1);
+//        
+//        Pelinappula oikea2 = null;
+//        Pelinappula tulos2 = ruutu1.getNappula();
+//        assertEquals(oikea2, tulos2);
+//    }
 }

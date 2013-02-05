@@ -1,11 +1,15 @@
 package pakovankilasta;
 
 /**
- *
+ * Vanki-nappula toimii pelaajan pelinappulana pelissä.
+ * 
  * @author $Olli Väisänen
  */
 public class Vanki extends Pelinappula {
     
+    /**
+     * Vanki kuuluu tietylle Pelaajalle.
+     */
     private Pelaaja pelaaja;
 
     public Vanki() {

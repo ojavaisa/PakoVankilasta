@@ -1,7 +1,9 @@
 package pakovankilasta;
 
 /**
- *
+ * Vartija-luokka muodostaa pelin Riveillä sijaitsevat Vartija-nappulat.
+ * Vartijat liikkuvat vain Rivillään, ja aina pelaajan siirron jälkeen.
+ * 
  * @author $Olli Väisänen
  */
 public class Vartija extends Pelinappula {

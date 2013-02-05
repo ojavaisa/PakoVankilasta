@@ -1,21 +1,41 @@
 package pakovankilasta;
 
 /**
- *
+ * Pako vankilasta-pelin lauta muodostuu Riveistä, jotka ovat Ruutu-taulukoita. Rivillä
+ * on yksi Vartija (lukuunottamatta ensimmäistä riviä, jolla ei ole Vartijaa), joka 
+ * pystyy liikkumaan vain Rivillä.
+ * 
  * @author $Olli Väisänen
  */
 
 public class Rivi {
     
-    private int riviNro;  //Alkaako numerointi venepäädystä vai vankilasta
-    private Ruutu[] ruudut; //ArrayList tai vastaava?
+    /**
+     * Rivin numero tallennetaan omaan muuttujaan.
+     */
+    private int riviNro; 
+    
+    /**
+     * Rivi muodostuu taulukosta Ruutuja.
+     */
+    private Ruutu[] ruudut; 
+    
+    /**
+     * Rivillä on yksi Vartija
+     */
     private Vartija vartija;
 
+    /**
+     * Konstruktori luo Rivi-olion Ruudut. Konstruktori käyttää erillistä 
+     * luoRuudut-metodia.
+     * @param koko Rivin koko (sama kuin Pelilaudan leveys)
+     * @param nro  Rivin numero
+     */
     public Rivi(int koko, int nro) {
 
         this.riviNro = nro;
         this.ruudut = new Ruutu[koko];
-        luoRuudut(ruudut); //luodaan ruudut omassa metodissaan
+        luoRuudut(ruudut); 
 
     }
 
@@ -55,15 +75,12 @@ public class Rivi {
 
     /**
      * asetaVartija-metodi asettaa Rivin Vartijan oikealle paikalleen
-     * aloitustilanteessa. Metodi saa riviNro-tiedon Pelilauta-luokalta ja
-     * asettaa sen perusteella Vartijan oikeaan kohtaan Rivillä.
+     * aloitustilanteessa. Vartijan paikka Rivillä määräytyy rivin numeron perusteella.
      *
-     * @see pakovankilasta.Pelilauta
      * @see pakovankilasta.Vartija
      *
-     * @param riviNro Pelilauta-luokalta saatava tieto Rivin numerosta
      */
-    public void asetaVartija() {
+    protected void asetaVartija() {
 
         if (this.riviNro > 0) { 
             int ruutuNro;
@@ -84,6 +101,15 @@ public class Rivi {
 
     }
     
+    /**
+     * vartijaEiSyo-metodi tarkistaa, että Rivillä oleva Vartija-nappula ei saa
+     * liikutettavaa Vanki-nappulaa kiinni. 
+     * 
+     * @param vanki Vanki-nappula, jota halutaan siirtää
+     * @param sarake Rivin Ruutu (sarake), johon Vanki on siirtymässä
+     * @return totuusarvo siitä, onko siirto sallittu (siirron on oltava sellainen,
+     * että pelaajan omaa nappulaa ei syödä)
+     */
     //Tarkistaa tällä hetkellä vain että juuri liikkunutta Vankia ei syödä! pitää tarkistaa vielä muut saman pelaajan vangit!
     protected boolean vartijaEiSyo(Vanki vanki, int sarake) {
         
@@ -104,7 +130,15 @@ public class Rivi {
         
     }
     
-    int siirronPituus(Vanki vanki, int sarake){
+    /**
+     * siirronPituus-metodi palauttaa halutun siirron pituuden Ruutujen lukumääränä.
+     * Tietoa tarvitaan Vartijan liikutteluun.
+     * 
+     * @param vanki Vanki-nappula, jota ollaan siirtämässä
+     * @param sarake kohdesarake, johon ollaan liikkumassa
+     * @return siirron pituus Ruutujen lukumääränä.
+     */
+    private int siirronPituus(Vanki vanki, int sarake){
         
         if(vanki.getSijainti()==null){
             return (this.riviNro+1);
@@ -123,6 +157,15 @@ public class Rivi {
         }
     }
     
+    /**
+     * liikutaVartijaa-metodi liikuttaa Rivin Vartijaa pelaajan siirron jälkeen
+     * liikkuneen Vangin suuntaan. Liikkuvan Vartijan siirron varrella olevat 
+     * Vanki-nappulat joutuvat takaisin selliin. 
+     * 
+     * @param vanki Vanki-nappula, joka liikkui
+     * @param sarake Ruudun sarake, johon Vanki liikkui
+     */
+    //HUOMHUOM!!! Tarkista onko Vanki tässä vaiheessa jo liikkunut! Jos on, siirronPituus ei toimi oikein!
     protected void liikutaVartijaa(Vanki vanki, int sarake) {
         
         int vanha = this.vartija.getSijainti().getSarake();
@@ -146,12 +189,6 @@ public class Rivi {
         }
     }
     
-
-    /**
-     * getRiviNro-metodi antaa rivin järjestysnumeron vankilan pihasta.
-     *
-     * @return antaa rivin järjestynumeron
-     */
     public int getRiviNro() {
         return riviNro;
     }
@@ -160,6 +197,11 @@ public class Rivi {
         return this.ruudut.length;
     }
     
+    /**
+     * getRuutu-metodi antaa pyydetyn Ruudun.
+     * @param sarakeNro halutun Ruudun numero Rivillä
+     * @return pyydetty Ruutu
+     */
     public Ruutu getRuutu(int sarakeNro) {
         return this.ruudut[sarakeNro];
     }

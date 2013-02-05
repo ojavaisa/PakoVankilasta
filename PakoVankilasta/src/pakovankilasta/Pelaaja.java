@@ -1,7 +1,7 @@
 package pakovankilasta;
 
 /**
- * Pelaaja-luokka luo pelaajan Vanki-nappulat.
+ * Pelaaja-luokka luo pelaajan Vanki-nappulat. Pelaajalla on neljä Vanki-nappulaa.
  * 
  * @see pakovankilasta.Vanki
  *
@@ -11,6 +11,9 @@ public class Pelaaja {
     
     private Vanki[] vangit;
     
+    /**
+     * Konstruktori luo Pelaaja-olion ja tämän 4 Vanki-nappulaa.
+     */
     public Pelaaja() {
         this.vangit = new Vanki[4];
         for(int i=0; i<4; i++) {
@@ -19,6 +22,14 @@ public class Pelaaja {
         }
     }
     
+    /**
+     * laudalla-metodi kertoo onko pelaajan kysytty Vanki-nappula Pelilaudalla.
+     * Pelaajan Vangit voivat olla laudan lisäksi veneessä (Vanki == null) tai 
+     * sellissä (Vanki.sijainti == null).
+     * 
+     * @param vanginNro Pelaajan Vangin numero (0..3)
+     * @return totuusarvo siitä onko kysytty Vanki-nappula laudalla vai ei.
+     */
     protected boolean laudalla(int vanginNro) {
         
         if(this.vangit[vanginNro] == null){
@@ -44,6 +55,12 @@ public class Pelaaja {
 //        }
 //    }
     
+    /**
+     * veneessa-metodi kertoo kuinka moni Pelaajan Vangeista on veneessä (Vanki == null).
+     * Jos kolme Pelaajan neljästä Vangista on veneessä, Pelaaja on voittanut. 
+     * 
+     * @return veneessä olevien Vankien lukumäärä
+     */
     protected int veneessa() {
         
         int veneessa = 0;

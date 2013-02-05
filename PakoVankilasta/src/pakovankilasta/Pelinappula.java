@@ -2,19 +2,18 @@ package pakovankilasta;
 
 /**
  * Pelinappula-luokka on pelissä käytettävien nappuloiden (Vartija ja Vanki) yliluokka.
- * Pelinappula sisältää tiedon Ruudusta, jossa on.
+ * Pelinappula sisältää tiedon Ruudusta, jossa nappula on.
  * 
  * @author Olli Väisänen
  */
 public class Pelinappula {
     
+    /**
+     * Ruutu, jossa Pelinappula sijaitsee. null-arvo tarkoittaa, että nappula ei ole 
+     * Pelilaudalla.
+     */
     private Ruutu sijainti;
 
-    /**
-     * getSijainti palauttaa Pelinappulan sijainnin (Ruudun)
-     *
-     * @return sijainti-muuttujan arvon (Ruutu)
-     */
     public Ruutu getSijainti() {
         return sijainti;
     }
@@ -23,6 +22,11 @@ public class Pelinappula {
         this.sijainti = ruutu;
     }
     
+    /**
+     * setSijaintiNull-metodi asettaa Pelinappulan sijainniksi arvon null, eli
+     * poistaa nappulan laudalta. Metodia käytetään siirrettäessä Vanki-nappula
+     * selliin.
+     */
     protected void setSijaintiNull() {
         this.sijainti = null;
     }

@@ -2,8 +2,8 @@ package pakovankilasta;
 
 /**
  * Pelilauta-luokka muodostaa pelin laudan. Pelilauta koostuu Riveistä.
- * Pelilaudan leveyden määrittää käyttäjän antama parametri koko. Laudan korkeus
- * on koko+1. //Blaa blaa, jotain laudan muodosta, pakoruuduista ja vartijoista?
+ * Pelilaudan leveyden määrittää käyttäjän antama parametri koko. 
+ * //jotain pakoruutujen ja vartijoiden sijainneista?
  *
  * @see pakovankilasta.Rivi
  *
@@ -14,17 +14,24 @@ public class Pelilauta {
     private int leveys;
     private Rivi[] rivit; //ArrayList tai vast?
 
+    /**
+     * Konstruktori luo Pelilaudan eli taulukon Rivejä. Pelilaudan leveys on 
+     * pelaajan antama pariton luku väliltä 5..15. Pelilaudan korkeus on yhtä suurempi,
+     * sillä laudan alin rivi (kauimpana venettä) on Vartijaton, "turvallinen" Rivi.
+     * 
+     * @param koko pelaajan antama laudan leveys
+     */
     public Pelilauta(int koko) {
 
         this.leveys = koko;
 
-        this.rivit = new Rivi[this.leveys + 1]; //Laudan korkeus on leveys+1
+        this.rivit = new Rivi[this.leveys + 1]; 
         luoRivit(rivit);
     }
 
     /**
      * luoRivit-metodi on konstruktorin käyttämä metodi, joka luo
-     * rivit-muuttujassa (Rivi[koko]) olevat Rivit ja asettaa niihin Vartijat
+     * rivit-muuttujassa olevat Rivit ja asettaa niihin Vartijat
      * (Rivi-luokan metodilla asetaVartija).
      *
      * @see pakovankilasta.Rivi
@@ -43,13 +50,12 @@ public class Pelilauta {
     }
 
     /**
-     * siirtoSallittu tarkistaa että siirto on joko vaakasuoraan tai
+     * siirtoSallittu tarkistaa, että pelaajan yrittämä siirto on joko vaakasuoraan tai
      * pystysuoraan
      *
-     * @param vanki
-     * @param sarake
-     * @param rivi
-     * @return
+     * @param vanki Vanki-nappula, jota halutaan siirtää
+     * @param kohde kohteena oleva Ruutu, johon ollaan siirtymässä
+     * @return totuusarvo, siitä onko siirto sallittu
      */
     protected boolean siirtoSallittu(Vanki vanki, Ruutu kohde) {
         
@@ -69,12 +75,13 @@ public class Pelilauta {
 
 
     /**
-     * reittiVapaa tarkistaa että kohteena oleva Ruutu on vapaa ja ettei siirron
-     * tiellä ole Vartijoita
+     * reittiVapaa-metodi tarkistaa että kohteena oleva Ruutu on vapaa ja ettei siirron
+     * tiellä ole Vartijoita. Edessä olevat Vanki-nappulat eivät estä siirtoa (paitsi
+     * kohteena olevassa Ruudussa). Tarkistus tapahtuu siirron tyypistä riippuvalla
+     * metodilla.
      *
      * @param vanki Vanki, jota halutaan liikuttaa
-     * @param sarake kohteena olevan Ruudun sarakeen numero
-     * @param rivi kohteena olevan Ruudun rivinumero
+     * @param kohde kohteena oleva Ruutu, johon ollaan siirtymässä
      * @return totuusarvo true, jos edessä ei ole vartijoita
      */
     protected boolean reittiVapaa(Vanki vanki, Ruutu kohde) {
@@ -99,6 +106,13 @@ public class Pelilauta {
 
     }
 
+    /**
+     * aloitusSiirto-metodi on reittiVapaa-metodin käyttämä tarkistus siirrolle,
+     * joka lähtee sellistä (liikutettava Vanki ei ole laudalla).
+     * 
+     * @param kohde Siirron kohteena oleva Ruutu
+     * @return totuusarvo siitä, onko reitti kohderuutuun vapaa
+     */
     private boolean aloitusSiirto(Ruutu kohde) {
 
         int rivi = kohde.getRiviNro();
@@ -113,6 +127,14 @@ public class Pelilauta {
 
     }
 
+    /**
+     * sarakeSiirto-metodi on reittiVapaa-metodin käyttämä tarkistus siirrolle,
+     * joka tehdään pitkin saraketta (pystysuora siirto).
+     * 
+     * @param vanki Vanki-nappula jota ollaan liikuttamassa
+     * @param rivi kohderivi, jolle ollaan menossa
+     * @return totuusarvo siitä, onko reitti kohderuutuun vapaa
+     */
     private boolean sarakeSiirto(Vanki vanki, int rivi) {
 
         int lahtoRivi = vanki.getSijainti().getRiviNro();
@@ -138,6 +160,14 @@ public class Pelilauta {
         }
     }
 
+    /**
+     * riviSiirto-metodi on reittiVapaa-metodin käyttämä tarkistus siirrolle,
+     * joka tehdään pitkin riviä (vaakasuora siirto).
+     * 
+     * @param vanki Vanki-nappula jota ollaan liikuttamassa
+     * @param sarake kohdesarake, jolle ollaan menossa
+     * @return totuusarvo siitä, onko reitti kohderuutuun vapaa
+     */
     private boolean riviSiirto(Vanki vanki, int sarake) {
 
         int lahtoSarake = vanki.getSijainti().getSarake();
@@ -164,8 +194,8 @@ public class Pelilauta {
     /**
      * getRiviNro antaa parametrina annetun Rivin
      *
-     * @param rivi Halutun Rivin numero (alkaen vankilan pihasta)
-     * @return Haluttu Rivi
+     * @param rivi halutun Rivin numero (alkaen vankilan pihasta)
+     * @return pyydetty Rivi
      */
     public Rivi getRivi(int rivi) {
         return rivit[rivi];

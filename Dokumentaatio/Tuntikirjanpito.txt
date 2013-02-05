@@ -9,3 +9,4 @@ ma 28.1.	2h: Pakoruutu luokasta Ruudun attribuutiksi, Pakokolmion laskeminen, na
 ti 29.1.	3h: Testiluokat PelilautaTest, RiviTest, VankiTest ja VartijaTest luotu. Testejä.
 ke 30.1.	4h: Pelaaja-luokka. Pelinappuloiden liikuttelutarkistuksia.
 to 31.1.	5h: Nappuloiden liikuttelulogiikka valmis? (Puuttuu enää pelaajan muiden kuin liikkuneen vangin syöntitarkistus), paja-ohjaus
+ti 5.2.		2h: Käyttöliittymä-luokka aloitettu. Alustavat JavaDocit kirjoitettu luokille

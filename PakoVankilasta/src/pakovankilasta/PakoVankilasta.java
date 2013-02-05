@@ -6,6 +6,7 @@ package pakovankilasta;
  */
 
 import java.util.Scanner;
+import javax.swing.SwingUtilities;
 
 public class PakoVankilasta {
 
@@ -19,6 +20,8 @@ public class PakoVankilasta {
     
     public static void main(String[] args) {
         
+        //Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
+        //SwingUtilities.invokeLater(kayttoliittyma);
         int lkm; 
         //char vinkit;
         boolean kesken = true;
@@ -149,7 +152,7 @@ public class PakoVankilasta {
             }
         }
         if(laudalla==0){ //Pelaajalla ei ole yhtään Vankia laudalla
-            uusiVanki();
+            //uusiVanki();
         } else if(laudalla == (4-veneessa)){ //Kaikki jäljellä olevat Vangit laudalla
             for(int i=1; i<=laudalla; i++){
             System.out.println("Valitse '" + i + "' siirtääksesi ruudussa XX olevaa vankia.\n");
@@ -173,7 +176,7 @@ public class PakoVankilasta {
         }
         
         if(valinta == 0){
-            uusiVanki();
+            //uusiVanki();
         } else {
             for(int i=min; i<=valinta; i++) {
                 

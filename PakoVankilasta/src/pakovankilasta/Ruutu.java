@@ -7,33 +7,29 @@ package pakovankilasta;
  */
 public class Ruutu {
     
+    /**
+     * Ruudussa oleva Pelinappula (Vanki tai Vartija). Arvo null tarkoittaa tyhjää Ruutua.
+     */
     private Pelinappula nappula;
-    private int riviNro, sarakeNro;
-    private boolean pakoRuutu;
     
     /**
-     * getNappula-metodi antaa Ruudussa olevan pelinappulan.
-     *
-     * @return Ruudussa oleva pelinappula
+     * Ruudun koordinaatit tallennetaan omiin muuttujiinsa.
      */
+    private int riviNro, sarakeNro;
+    
+    /**
+     * Ruutu voi olla tavallinen ruutu tai pakoruutu.
+     */
+    private boolean pakoRuutu;
+    
     public Pelinappula getNappula() {
         return nappula;
     }
-    
-    /**
-     * getRiviNro-metodi antaa Ruudun rivinumeron.
-     *
-     * @return Ruudun rivin numero
-     */
+   
     public int getRiviNro() {
         return riviNro;
     }
     
-    /**
-     * getSarake-metodi antaa Ruudun sarakenumeron.
-     *
-     * @return Ruudun sarakkeen numero
-     */
     public int getSarake() {
         return sarakeNro;
     }
@@ -49,7 +45,7 @@ public class Ruutu {
 
     /**
      * setNappula-metodi asettaa ruutuun pelinappulan.
-     * Antaa virheilmoituksen, jos siirto ei onnistu (ruudussa on jo nappula).
+     * //Antaa virheilmoituksen, jos siirto ei onnistu (ruudussa on jo nappula).
      *
      * @param nappula nappula-muuttujan uusi arvo
      */
