@@ -5,6 +5,7 @@ package pakovankilasta;
  *
  * @author $Olli Väisänen
  */
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Ruutu {
@@ -13,6 +14,7 @@ public class Ruutu {
      * Ruudussa oleva Pelinappula (Vanki tai Vartija). Arvo null tarkoittaa tyhjää Ruutua.
      */
     private Pelinappula nappula;
+    private int koko = 20;
     
     /**
      * Ruudun koordinaatit tallennetaan omiin muuttujiinsa.
@@ -90,12 +92,19 @@ public class Ruutu {
     }
     
     public void piirra(Graphics g) {
-        int x = (sarakeNro * 20) + 50;
-        int y = 250 - (riviNro * 20);
-        g.drawRect(x, y, 20, 20);
-//        if(this.nappula != null) {
-//            this.nappula.piirra();
-//        }
+        int x = (sarakeNro * koko) + 50;
+        int y = 400 - (riviNro * koko);
+        
+        if(pakoRuutu){
+            g.setColor(Color.RED);
+            g.fillRect(x, y, koko, koko);
+            g.setColor(Color.BLACK);
+            g.drawRect(x, y, koko, koko);
+        } else {
+            g.setColor(Color.BLACK);
+            g.drawRect(x, y, koko, koko);
+        }
+
     }
 
 }

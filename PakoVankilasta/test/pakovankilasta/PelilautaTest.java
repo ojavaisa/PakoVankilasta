@@ -30,8 +30,8 @@ public class PelilautaTest {
 
     @Before
     public void setUp() {
-        lauta = new Pelilauta(koko);
-        vanki = new Vanki();
+        lauta = new Pelilauta(koko, 2);
+        vanki = new Vanki(0);
     }
 
     @After

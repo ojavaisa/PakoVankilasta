@@ -15,6 +15,7 @@ public class Pelilauta {
 
     private int leveys;
     private Rivi[] rivit; //ArrayList tai vast?
+    private Pelaaja[] pelaajat;
 
     /**
      * Konstruktori luo Pelilaudan eli taulukon Rivejä. Pelilaudan leveys on 
@@ -23,12 +24,17 @@ public class Pelilauta {
      * 
      * @param koko pelaajan antama laudan leveys
      */
-    public Pelilauta(int koko) {
+    public Pelilauta(int koko, int pelaajat) {
 
         this.leveys = koko;
 
         this.rivit = new Rivi[this.leveys + 1]; 
         luoRivit(rivit);
+        
+        this.pelaajat = new Pelaaja[pelaajat];
+        for(int i=0; i<pelaajat; i++){
+            this.pelaajat[i] = new Pelaaja(i);
+        }
     }
 
     /**
@@ -50,6 +56,8 @@ public class Pelilauta {
             rivit[i].asetaVartija();
         }
     }
+    
+    
 
     /**
      * siirtoSallittu tarkistaa, että pelaajan yrittämä siirto on joko vaakasuoraan tai
@@ -219,6 +227,10 @@ public class Pelilauta {
     public int getKoko() {
         return this.rivit.length;
     }
+    
+    public Pelaaja getPelaaja(int nro) {
+        return this.pelaajat[nro];
+    }
 
     @Override
     public String toString() {
@@ -241,6 +253,14 @@ public class Pelilauta {
     public void piirra(Graphics g) {
         for(int i=0; i<rivit.length; i++){
             rivit[i].piirra(g);
+            if(i!=0){
+                rivit[i].getVartija().piirra(g);                
+            }
+        }
+        for(int i=0; i<pelaajat.length; i++){
+            for(int j=0; j<4; j++) {
+                pelaajat[i].getVanki(j).piirra(g);
+            }
         }
         
     }

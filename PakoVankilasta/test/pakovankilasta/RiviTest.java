@@ -36,7 +36,7 @@ public class RiviTest {
         rivi1.asetaVartija();
         rivi9 = new Rivi(koko, 9);
         rivi9.asetaVartija();
-        vanki = new Vanki();
+        vanki = new Vanki(0);
     }
 
     @After

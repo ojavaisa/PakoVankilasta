@@ -1,5 +1,8 @@
 package pakovankilasta;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  * Vartija-luokka muodostaa pelin Riveillä sijaitsevat Vartija-nappulat.
  * Vartijat liikkuvat vain Rivillään, ja aina pelaajan siirron jälkeen.
@@ -37,6 +40,17 @@ public class Vartija extends Pelinappula {
     @Override
     public String toString(){
         return "@";
+    }
+    
+    @Override
+    public void piirra(Graphics g) {
+        
+        int x = ((this.getSijainti().getSarake() * 20) + 50) + 5;
+        int y = (400 - (this.getSijainti().getRiviNro() * 20)) + 5;
+        
+        g.setColor(Color.BLACK);
+        g.fillRect(x, y, 11, 11);
+        
     }
     
 }

@@ -10,16 +10,26 @@ package pakovankilasta;
 public class Pelaaja {
     
     private Vanki[] vangit;
+    private int pelaajaNro;
     
     /**
      * Konstruktori luo Pelaaja-olion ja tämän 4 Vanki-nappulaa.
      */
-    public Pelaaja() {
+    public Pelaaja(int nro) {
+        this.pelaajaNro = nro;
         this.vangit = new Vanki[4];
         for(int i=0; i<4; i++) {
-            this.vangit[i] = new Vanki();
+            this.vangit[i] = new Vanki(i);
             this.vangit[i].setPelaaja(this);
         }
+    }
+    
+    public int getPelaajaNro() {
+        return this.pelaajaNro;
+    }
+    
+    public Vanki getVanki(int nro){
+        return this.vangit[nro];
     }
     
     /**

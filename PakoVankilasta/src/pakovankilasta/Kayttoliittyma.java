@@ -25,7 +25,7 @@ public class Kayttoliittyma implements Runnable {
         @Override
         public void run() {
             frame = new JFrame("Pako vankilasta");
-            frame.setPreferredSize(new Dimension(400, 400));
+            frame.setPreferredSize(new Dimension(400, 500));
             
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             
@@ -41,15 +41,9 @@ public class Kayttoliittyma implements Runnable {
             Piirtoalusta piirtoalusta = new Piirtoalusta(lauta);
             
             container.add(piirtoalusta);
-//            container.add(luoValikko());
+            frame.addMouseListener(new HiirenKuuntelija(lauta, piirtoalusta));
+
         }
-        
-//        private JPanel luoValikko() {
-//            JPanel panel = new JPanel(new GridLayout(2, 1));
-//            panel.add(new JButton("Nappi 1"));
-//            panel.add(new JButton("Nappi 2"));
-//            return panel;
-//        }
         
         public JFrame getFrame() {
             return frame;
