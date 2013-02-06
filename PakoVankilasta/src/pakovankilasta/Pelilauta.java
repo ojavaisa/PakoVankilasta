@@ -1,5 +1,7 @@
 package pakovankilasta;
 
+import java.awt.Graphics;
+
 /**
  * Pelilauta-luokka muodostaa pelin laudan. Pelilauta koostuu Riveistä.
  * Pelilaudan leveyden määrittää käyttäjän antama parametri koko. 
@@ -234,5 +236,12 @@ public class Pelilauta {
             lauta = lauta + rivit[i] + "\n";
         }
         return lauta;
+    }
+    
+    public void piirra(Graphics g) {
+        for(int i=0; i<rivit.length; i++){
+            rivit[i].piirra(g);
+        }
+        
     }
 }

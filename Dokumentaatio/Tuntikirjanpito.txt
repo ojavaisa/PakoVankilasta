@@ -11,3 +11,4 @@ ke 30.1.	4h: Pelaaja-luokka. Pelinappuloiden liikuttelutarkistuksia.
 to 31.1.	5h: Nappuloiden liikuttelulogiikka valmis? (Puuttuu enää pelaajan muiden kuin liikkuneen vangin syöntitarkistus), paja-ohjaus
 ti 5.2.		2h: Käyttöliittymä-luokka aloitettu. Alustavat JavaDocit kirjoitettu luokille
 			5h: Testejä luokille ja metodeille
+ke 6.2.		1h: Graafisen käyttöliittymän aloitus

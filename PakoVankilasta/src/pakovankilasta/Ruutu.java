@@ -5,6 +5,8 @@ package pakovankilasta;
  *
  * @author $Olli Väisänen
  */
+import java.awt.Graphics;
+
 public class Ruutu {
     
     /**
@@ -84,8 +86,16 @@ public class Ruutu {
         } else {
             return "|" + this.nappula.toString();
         }
+        
     }
     
-    
+    public void piirra(Graphics g) {
+        int x = (sarakeNro * 20) + 50;
+        int y = 250 - (riviNro * 20);
+        g.drawRect(x, y, 20, 20);
+//        if(this.nappula != null) {
+//            this.nappula.piirra();
+//        }
+    }
 
 }

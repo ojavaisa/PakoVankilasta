@@ -20,36 +20,37 @@ public class PakoVankilasta {
     
     public static void main(String[] args) {
         
-        //Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
-        //SwingUtilities.invokeLater(kayttoliittyma);
-        int lkm; 
-        //char vinkit;
-        boolean kesken = true;
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(new Pelilauta(9));
+        SwingUtilities.invokeLater(kayttoliittyma);
         
-        System.out.println("Pako vankilasta\n" + 
-                           "===============\n\n");
-        
-        //koko = laudanKoko();
-        lauta = new Pelilauta(laudanKoko());
-        
-        lkm = pelaajienLkm();
-        pelaajat = new Pelaaja[lkm];
-        for(int i=0; i<lkm; i++){
-            pelaajat[i] = new Pelaaja();
-        }
-        
-        do {
-            for(int i=0; i<lkm; i++){
-                System.out.println(lauta);
-                //valinta(i);
-                
-                
-            }
-            
-            kesken = false;
-            
-        } while(kesken);
-        
+//        int lkm; 
+//        //char vinkit;
+//        boolean kesken = true;
+//        
+//        System.out.println("Pako vankilasta\n" + 
+//                           "===============\n\n");
+//        
+//        //koko = laudanKoko();
+//        lauta = new Pelilauta(laudanKoko());
+//        
+//        lkm = pelaajienLkm();
+//        pelaajat = new Pelaaja[lkm];
+//        for(int i=0; i<lkm; i++){
+//            pelaajat[i] = new Pelaaja();
+//        }
+//        
+//        do {
+//            for(int i=0; i<lkm; i++){
+//                System.out.println(lauta);
+//                //valinta(i);
+//                
+//                
+//            }
+//            
+//            kesken = false;
+//            
+//        } while(kesken);
+//        
         
     }
     

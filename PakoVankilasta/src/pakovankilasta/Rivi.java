@@ -1,5 +1,7 @@
 package pakovankilasta;
 
+import java.awt.Graphics;
+
 /**
  * Pako vankilasta-pelin lauta muodostuu Riveistä, jotka ovat Ruutu-taulukoita.
  * Rivillä on yksi Vartija (lukuunottamatta ensimmäistä riviä, jolla ei ole
@@ -230,5 +232,12 @@ public class Rivi {
         rivi = rivi + "|";
 
         return rivi;
+    }
+    
+    public void piirra(Graphics g) {
+        for(int i=0; i<ruudut.length; i++){
+            ruudut[i].piirra(g);
+        }
+        
     }
 }
