@@ -11,11 +11,16 @@ import java.awt.Graphics;
  *
  * @author $Olli Väisänen
  */
+
 public class Pelilauta {
 
     private int leveys;
     private Rivi[] rivit; //ArrayList tai vast?
     private Pelaaja[] pelaajat;
+    
+    private static int ruudunKoko = 20;
+    private static int vasenReuna = 58; 
+    private static int alaReuna = 450; 
 
     /**
      * Konstruktori luo Pelilaudan eli taulukon Rivejä. Pelilaudan leveys on 
@@ -233,17 +238,23 @@ public class Pelilauta {
     }
     
     public int muunnaX(int x) {
-        int sarakeNro;
         
-        sarakeNro = (x - 50) / 20;
-        return sarakeNro;
+        if(x<vasenReuna || x>(this.leveys*ruudunKoko+vasenReuna)) {
+            return -1;
+        } else {
+            return (int) ((x - vasenReuna) / ruudunKoko);
+        }
     }
     
     public int muunnaY(int y) {
-        int riviNro;
         
-        riviNro = (400 - y) / 20;
-        return riviNro;
+        if(y>alaReuna){
+            return -1;
+        } else if (y<(alaReuna-(this.getKoko())*ruudunKoko)) {
+            return 99;
+        } else {
+            return (int) ((alaReuna - y) / ruudunKoko);
+        }
     }
 
     @Override

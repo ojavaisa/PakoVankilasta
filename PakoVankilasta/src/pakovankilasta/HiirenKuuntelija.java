@@ -47,7 +47,17 @@ public class HiirenKuuntelija implements MouseListener {
         y = e.getY();
         sarake = lauta.muunnaX(x);
         rivi = lauta.muunnaY(y);
-        System.out.println("Ruutu (" + x + "," + y +")");
-        //Ruutu valinta = lauta.getRivi(rivi).getRuutu(sarake);
+        if(rivi >= 0 && rivi < 99 && sarake >= 0) {
+            System.out.println("Ruutu (" + sarake + "," + rivi +")");
+//            Ruutu valinta = lauta.getRivi(rivi).getRuutu(sarake);
+        } else if (rivi==-1 && sarake >= 0) {
+            System.out.println("Aloitussiirto");
+        } else if (rivi==99 && sarake >= 0) {
+            System.out.println("Venesiirto");
+        } else {
+            System.out.println("Laudan ulkopuolella");
+        }
+        
+
     }
 }
