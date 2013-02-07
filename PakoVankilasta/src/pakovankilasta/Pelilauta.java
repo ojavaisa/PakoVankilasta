@@ -231,6 +231,20 @@ public class Pelilauta {
     public Pelaaja getPelaaja(int nro) {
         return this.pelaajat[nro];
     }
+    
+    public int muunnaX(int x) {
+        int sarakeNro;
+        
+        sarakeNro = (x - 50) / 20;
+        return sarakeNro;
+    }
+    
+    public int muunnaY(int y) {
+        int riviNro;
+        
+        riviNro = (400 - y) / 20;
+        return riviNro;
+    }
 
     @Override
     public String toString() {

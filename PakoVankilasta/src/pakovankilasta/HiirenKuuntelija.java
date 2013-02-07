@@ -40,7 +40,14 @@ public class HiirenKuuntelija implements MouseListener {
     
     @Override
     public void mouseClicked(MouseEvent e) {
-//        eventOutput("Mouse clicked (# of clicks: "
-//                + e.getClickCount() + ")", e);
+        
+        int x, y, sarake, rivi;
+        
+        x = e.getX();
+        y = e.getY();
+        sarake = lauta.muunnaX(x);
+        rivi = lauta.muunnaY(y);
+        System.out.println("Ruutu (" + x + "," + y +")");
+        //Ruutu valinta = lauta.getRivi(rivi).getRuutu(sarake);
     }
 }
