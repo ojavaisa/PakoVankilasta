@@ -42,15 +42,15 @@ public class Vartija extends Pelinappula {
         return "@";
     }
     
-    @Override
-    public void piirra(Graphics g) {
-        
-        int x = ((this.getSijainti().getSarake() * 20) + 50) + 5;
-        int y = (400 - (this.getSijainti().getRiviNro() * 20)) + 5;
-        
-        g.setColor(Color.BLACK);
-        g.fillRect(x, y, 11, 11);
-        
-    }
+//    @Override
+//    public void piirra(Graphics g) {
+//        
+//        int x = ((this.getSijainti().getSarake() * 20) + 50) + 5;
+//        int y = (400 - (this.getSijainti().getRiviNro() * 20)) + 5;
+//        
+//        g.setColor(Color.BLACK);
+//        g.fillRect(x, y, 11, 11);
+//        
+//    }
     
 }

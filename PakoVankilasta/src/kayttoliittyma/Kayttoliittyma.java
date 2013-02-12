@@ -1,9 +1,10 @@
-package pakovankilasta;
+package kayttoliittyma;
 
 /**
  *
  * @author $Olli Väisänen
  */
+import kayttoliittyma.HiirenKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -12,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import pakovankilasta.Pelilauta;
 
 public class Kayttoliittyma implements Runnable {
 

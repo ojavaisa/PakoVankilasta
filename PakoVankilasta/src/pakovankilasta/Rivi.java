@@ -1,6 +1,6 @@
 package pakovankilasta;
 
-import java.awt.Graphics;
+//import java.awt.Graphics;
 
 /**
  * Pako vankilasta-pelin lauta muodostuu Riveistä, jotka ovat Ruutu-taulukoita.
@@ -170,28 +170,26 @@ public class Rivi {
      * @param vanki Vanki-nappula, joka liikkui
      * @param sarake Ruudun sarake, johon Vanki liikkui
      */
-    //HUOMHUOM!!! Tarkista onko Vanki tässä vaiheessa jo liikkunut! Jos on, siirronPituus ei toimi oikein!
-    protected void liikutaVartijaa(Vanki vanki, int sarake) {
+    protected void liikutaVartijaa(Vanki vanki, int pituus) {
 
-        int vanha = this.vartija.getSijainti().getSarake();
-        int uusi;
-        if (sarake > vanha) {
-            uusi = vanha + siirronPituus(vanki, sarake);
-            for (int i = vanha; i <= uusi; i++) { //Tarkistetaan matkan varrella olevat Vangit
-                if (this.ruudut[i].getNappula() != null) {
-                    this.ruudut[i].setNappulaNull();
-                }
-            }
-            this.vartija.liiku(this.ruudut[uusi]);
-        } else { //sarake < vanha
-            uusi = vanha - siirronPituus(vanki, sarake);
-            for (int i = vanha; i >= uusi; i--) { //Tarkistetaan matkan varrella olevat Vangit
-                if (this.ruudut[i].getNappula() != null) {
-                    this.ruudut[i].setNappulaNull();
-                }
-            }
-            this.vartija.liiku(this.ruudut[uusi]);
+        int min, max, uusi;
+        
+        if (vanki.getSijainti().getSarake() > this.vartija.getSijainti().getSarake()) {
+            min = this.vartija.getSijainti().getSarake();
+            max = min + pituus;
+            uusi = max;
+        } else {
+            max = this.vartija.getSijainti().getSarake();
+            min = max - pituus;
+            uusi = min;
         }
+        
+        for(int i=min; i<=max; i++){ //Tarkistetaan matkan varrella olevat Vangit
+                if (this.ruudut[i].getNappula() != null) {
+                    this.ruudut[i].setNappulaNull();
+                }
+            }
+        this.vartija.liiku(this.ruudut[uusi]);
     }
 
     public int getRiviNro() {
@@ -234,10 +232,10 @@ public class Rivi {
         return rivi;
     }
     
-    public void piirra(Graphics g) {
-        for(int i=0; i<ruudut.length; i++){
-            ruudut[i].piirra(g);
-        }
-        
-    }
+//    public void piirra(Graphics g) {
+//        for(int i=0; i<ruudut.length; i++){
+//            ruudut[i].piirra(g);
+//        }
+//        
+//    }
 }

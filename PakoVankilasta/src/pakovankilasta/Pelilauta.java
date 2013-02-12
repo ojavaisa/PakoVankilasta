@@ -1,6 +1,6 @@
 package pakovankilasta;
 
-import java.awt.Graphics;
+//import java.awt.Graphics;
 
 /**
  * Pelilauta-luokka muodostaa pelin laudan. Pelilauta koostuu Riveistä.
@@ -18,9 +18,9 @@ public class Pelilauta {
     private Rivi[] rivit; //ArrayList tai vast?
     private Pelaaja[] pelaajat;
     
-    private static int ruudunKoko = 20;
-    private static int vasenReuna = 58; 
-    private static int alaReuna = 450; 
+    private static int ruudunKoko = 20;  //HUOMHUOM! Tarkista nää vrt. piirtoalustan koordinaatit + linux vs. windows
+    private static int vasenReuna = 58;  //Linuxilla 51?
+    private static int alaReuna = 450;   //Linuxilla 448?
 
     /**
      * Konstruktori luo Pelilaudan eli taulukon Rivejä. Pelilaudan leveys on 
@@ -134,12 +134,7 @@ public class Pelilauta {
         int rivi = kohde.getRiviNro();
         int sarake = kohde.getSarake();
         
-        for (int i = 1; i <= rivi; i++) { //Rivillä 0 ei ole Vartijaa!
-            if (rivit[i].getVartija().getSijainti().getSarake() == sarake) {
-                return false;
-            }
-        }
-        return true;
+        return tarkistaSarake(sarake, 1, rivi); //riviä 0 ei tarvitse tarkistaa!
 
     }
 
@@ -155,31 +150,30 @@ public class Pelilauta {
 
         int lahtoRivi = vanki.getSijainti().getRiviNro();
         int sarake = vanki.getSijainti().getSarake();
-        int vartijanSarake;
 
         if (lahtoRivi < rivi) {
             if(lahtoRivi == 0) {
                 lahtoRivi++; //Riviä 0 ei tarvitse tarkistaa
             }
-            for (int i = lahtoRivi; i <= rivi; i++) {
-                vartijanSarake = rivit[i].getVartija().getSijainti().getSarake();
-                if (vartijanSarake == sarake) {
-                    return false;
-                }
-            }
-            return true;
+            return tarkistaSarake(sarake, lahtoRivi, rivi);
         } else { //lahtoRivi > rivi (lahtoRivi == rivi)-tapaus käsitellään muualla?
             if(rivi == 0) {
                 rivi++; //Riviä 0 ei tarvitse tarkistaa
             }
-            for (int i = lahtoRivi; i >= rivi; i--) {
-                vartijanSarake = rivit[i].getVartija().getSijainti().getSarake();
-                if (vartijanSarake == sarake) {
-                    return false;
-                }
-            }
-            return true;
+            return tarkistaSarake(sarake, rivi, lahtoRivi);
         }
+    }
+    
+    private boolean tarkistaSarake(int sarake, int rivi1, int rivi2) {
+        int vartijanSarake;
+        
+        for(int i=rivi1; i<=rivi2; i++){
+            vartijanSarake = rivit[i].getVartija().getSijainti().getSarake();
+            if(vartijanSarake == sarake){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -233,6 +227,10 @@ public class Pelilauta {
         return this.rivit.length;
     }
     
+    public int getPelaajia() {
+        return this.pelaajat.length;
+    }
+    
     public Pelaaja getPelaaja(int nro) {
         return this.pelaajat[nro];
     }
@@ -275,18 +273,18 @@ public class Pelilauta {
         return lauta;
     }
     
-    public void piirra(Graphics g) {
-        for(int i=0; i<rivit.length; i++){
-            rivit[i].piirra(g);
-            if(i!=0){
-                rivit[i].getVartija().piirra(g);                
-            }
-        }
-        for(int i=0; i<pelaajat.length; i++){
-            for(int j=0; j<4; j++) {
-                pelaajat[i].getVanki(j).piirra(g);
-            }
-        }
-        
-    }
+//    public void piirra(Graphics g) {
+//        for(int i=0; i<rivit.length; i++){
+//            rivit[i].piirra(g);
+//            if(i!=0){
+//                rivit[i].getVartija().piirra(g);                
+//            }
+//        }
+//        for(int i=0; i<pelaajat.length; i++){
+//            for(int j=0; j<4; j++) {
+//                pelaajat[i].getVanki(j).piirra(g);
+//            }
+//        }
+//        
+//    }
 }

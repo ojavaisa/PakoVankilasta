@@ -1,4 +1,4 @@
-package pakovankilasta;
+package kayttoliittyma;
 
 /**
  *
@@ -7,6 +7,7 @@ package pakovankilasta;
 
 import java.util.Scanner;
 import javax.swing.SwingUtilities;
+import pakovankilasta.Pelilauta;
 
 public class PakoVankilasta {
 
@@ -20,8 +21,7 @@ public class PakoVankilasta {
     
     public static void main(String[] args) {
         
-        Kayttoliittyma kayttoliittyma; //= new Kayttoliittyma(new Pelilauta(15));
-        //SwingUtilities.invokeLater(kayttoliittyma);
+        Kayttoliittyma kayttoliittyma; 
         
         int lkm; 
         //char vinkit;
@@ -30,7 +30,6 @@ public class PakoVankilasta {
         System.out.println("Pako vankilasta\n" + 
                            "===============\n\n");
         
-        //koko = laudanKoko();
         lauta = new Pelilauta(laudanKoko(), pelaajienLkm());
         kayttoliittyma = new Kayttoliittyma(lauta);
         SwingUtilities.invokeLater(kayttoliittyma);
