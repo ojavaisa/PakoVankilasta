@@ -16,15 +16,15 @@ public class Peli {
     private Pelilauta lauta;
     private Pelaaja[] pelaajat;
     private Pelaaja vuorossa;
-    private int pelaajaNro; 
-    private Vanki valittu;
+    private int pelaajaNro;
+    protected Vanki valittu;
     private static Scanner lukija = new Scanner(System.in);
     boolean kesken = true;
 
     public Peli() {
 
         System.out.println("Pako vankilasta\n"
-                + "===============\n\n");
+                + "===============\n");
 
         System.out.println("Anna pelilaudan koko.");
         this.lauta = new Pelilauta(laudanKoko());
@@ -32,52 +32,63 @@ public class Peli {
         this.pelaajat = new Pelaaja[pelaajienLkm()];
         for (int i = 0; i < pelaajat.length; i++) {
             this.pelaajat[i] = new Pelaaja(i);
-            for(int j=0; j < pelaajat[i].getJaljella(); j++) {
+            for (int j = 0; j < pelaajat[i].getJaljella(); j++) {
                 this.pelaajat[i].getVanki(j).setPelaaja(this.pelaajat[i]);
             }
         }
         this.pelaajaNro = 0;
         this.vuorossa = pelaajat[this.pelaajaNro];
         this.valittu = null;
+        System.out.println("Pelaaja " + (pelaajaNro + 1));
 
     }
 
     public boolean vuoro(int rivi, int sarake) {
 
-        Ruutu kohde = this.lauta.getRivi(rivi).getRuutu(sarake);
-        if(tarkistaSiirto(kohde)) {
-            siirto(kohde);
-            pelaajaNro++;
-            if(pelaajaNro >= this.pelaajat.length) {
-                pelaajaNro = 0;
+        if (rivi == 99) {
+            if (tarkistaVeneSiirto()) {
+                this.kesken = veneSiirto();
+                this.valittu = null;
+                seuraavaPelaaja();
+                return true;
+            } else {
+                return false;
             }
-            this.vuorossa = this.pelaajat[pelaajaNro];
-            return true;
+
         } else {
-            return false;
+
+            Ruutu kohde = this.lauta.getRivi(rivi).getRuutu(sarake);
+            if (tarkistaSiirto(kohde)) {
+                siirto(kohde);
+                this.valittu = null;
+                seuraavaPelaaja();
+                return true;
+            } else {
+                return false;
+            }
         }
 
-//        //venesiirrolle tehtävä tarkistus
-//        if (vuorossa.getJaljella() == 1) {
-//            System.out.println("Pelaaja " + pelaajaNro + " voitti!");
-//            //EXIT_SUCCESS tai jotain
-//        } else {
-//            
-//        }
-//        return false;
-
     }
-    
+
+    private void seuraavaPelaaja() {
+        pelaajaNro++;
+        if (pelaajaNro >= this.pelaajat.length) {
+            pelaajaNro = 0;
+        }
+        this.vuorossa = this.pelaajat[pelaajaNro];
+        System.out.println("Pelaaja " + (pelaajaNro + 1));
+    }
+
     private boolean tarkistaSiirto(Ruutu kohde) {
-        
-        if(this.valittu.getSijainti() == kohde) { //tarkistetaan että pelaaja ei yritä liikkua samaan ruutuun jossa jo on
+
+        if (this.valittu.getSijainti() == kohde) { //tarkistetaan että pelaaja ei yritä liikkua samaan ruutuun jossa jo on
             return false;
         } else if (!this.lauta.siirtoSallittu(this.valittu, kohde)) {
-            return false;            
+            return false;
         } else if (!this.lauta.reittiVapaa(this.valittu, kohde)) {
             return false;
         } else {
-            if(kohde.getRiviNro()>0){
+            if (kohde.getRiviNro() > 0) {
                 int rivi = kohde.getRiviNro();
                 int sarake = kohde.getSarake();
                 return this.lauta.getRivi(rivi).vartijaEiSyo(this.valittu, sarake);
@@ -85,43 +96,70 @@ public class Peli {
                 return true;
             }
         }
+    }
 
-        
+    private boolean tarkistaVeneSiirto() {
+
+        int sarake = this.valittu.getSijainti().getSarake();
+        int rivi = this.lauta.getKoko() - 1;
+
+        if (!this.valittu.getSijainti().onkoPako()) {
+            return false;
+        } else if (this.valittu.getSijainti().getRiviNro() == rivi) {
+            return true;
+        } else if (!this.lauta.reittiVapaa(this.valittu, this.lauta.getRivi(rivi).getRuutu(sarake))) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private void siirto(Ruutu kohde) {
-        
+
         int rivi = kohde.getRiviNro();
         int sarake = kohde.getSarake();
         int pituus = this.lauta.getRivi(rivi).siirronPituus(this.valittu, sarake);
-        
-        if(rivi!=0) {
+
+        if (rivi != 0) {
             this.valittu.liiku(kohde);
             this.lauta.getRivi(rivi).liikutaVartijaa(valittu, pituus);
         } else { //rivi==0
             this.valittu.liiku(kohde);
         }
     }
-    
+
+    private boolean veneSiirto() {
+        this.valittu.getSijainti().setNappulaNull();
+        this.vuorossa.siirraVeneeseen(this.valittu);
+        //halytys()
+        if (vuorossa.getJaljella() == 1) {
+            System.out.println("Pelaaja " + pelaajaNro + " voitti!");
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     protected boolean valitseVanki(int rivi, int sarake) {
-        
-        this.valittu = null; //tarpeellinen? / aiheuttaako ongelmia?
-        if(rivi==-1){
+
+        //this.valittu = null; //tarpeellinen? / aiheuttaako ongelmia?
+        if (rivi == -1) {
             //valitaan sellissä oleva vanki!
-            if(this.vuorossa.getSellissa() > 0) {
+            if (this.vuorossa.getSellissa() > 0) {
                 this.valittu = this.vuorossa.getVankiSellista();
                 return true;
             } else {
                 return false;
             }
         } else if (rivi >= 0 && rivi < 99 && sarake >= 0) {
-            
+
             Pelinappula nappula = this.lauta.getRivi(rivi).getRuutu(sarake).getNappula();
-            if(nappula == null) {
+            if (nappula == null) {
                 return false;
             } else {
-                for(int i=0; i<vuorossa.getJaljella(); i++) {
-                    if(vuorossa.getVanki(i) == nappula) {
+                for (int i = 0; i < vuorossa.getJaljella(); i++) {
+                    if (vuorossa.getVanki(i) == nappula) {
                         this.valittu = vuorossa.getVanki(i);
                         return true;
                     }

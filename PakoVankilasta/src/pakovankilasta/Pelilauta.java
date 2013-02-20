@@ -182,6 +182,11 @@ public class Pelilauta {
 
         int lahtoSarake = vanki.getSijainti().getSarake();
         int rivi = vanki.getSijainti().getRiviNro();
+        
+        if(rivi == 0){
+            return true;
+        }
+        
         int vartijanSarake = rivit[rivi].getVartija().getSijainti().getSarake();
 
         if (lahtoSarake < sarake) {
