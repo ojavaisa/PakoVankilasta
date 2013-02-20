@@ -35,8 +35,8 @@ public class VankiTest {
     
     @Before
     public void setUp() {
-        vanki1 = new Vanki(0);
-        vanki2 = new Vanki(1);
+        vanki1 = new Vanki();
+        vanki2 = new Vanki();
         ruutu1 = new Ruutu(1, 1, false);
         ruutu2 = new Ruutu(2, 1, false);
         ruutuVartija = new Ruutu(3, 1, false);

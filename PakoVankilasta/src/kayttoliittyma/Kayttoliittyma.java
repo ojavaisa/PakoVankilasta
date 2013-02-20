@@ -4,7 +4,6 @@ package kayttoliittyma;
  *
  * @author $Olli Väisänen
  */
-import kayttoliittyma.HiirenKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -13,15 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import pakovankilasta.Pelilauta;
 
 public class Kayttoliittyma implements Runnable {
 
         private JFrame frame;
-        private Pelilauta lauta;
+        private Peli peli;
         
-        public Kayttoliittyma(Pelilauta lauta) {
-            this.lauta = lauta;
+        public Kayttoliittyma() {
+            this.peli = new Peli();
         }
 
         @Override
@@ -33,7 +31,6 @@ public class Kayttoliittyma implements Runnable {
             
             luoKomponentit(frame.getContentPane());
             
-            
             frame.pack();
             frame.setVisible(true);
         }
@@ -41,10 +38,10 @@ public class Kayttoliittyma implements Runnable {
         private void luoKomponentit(Container container) {
 //            GridLayout layout = new GridLayout(1, 2);
 //            container.setLayout(layout);
-            Piirtoalusta piirtoalusta = new Piirtoalusta(lauta);
+            Piirtoalusta piirtoalusta = new Piirtoalusta(this.peli);
             
             container.add(piirtoalusta);
-            frame.addMouseListener(new HiirenKuuntelija(lauta, piirtoalusta));
+            frame.addMouseListener(new HiirenKuuntelija(this.peli, piirtoalusta));
 
         }
         

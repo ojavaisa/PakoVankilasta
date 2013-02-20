@@ -113,7 +113,7 @@ public class Rivi {
      * sellainen, että pelaajan omaa nappulaa ei syödä)
      */
     //Tarkistaa tällä hetkellä vain että juuri liikkunutta Vankia ei syödä! pitää tarkistaa vielä muut saman pelaajan vangit!
-    protected boolean vartijaEiSyo(Vanki vanki, int sarake) {
+    public boolean vartijaEiSyo(Vanki vanki, int sarake) {
 
         if (this.riviNro == 0) {
             return true;
@@ -143,18 +143,18 @@ public class Rivi {
      * @param sarake kohdesarake, johon ollaan liikkumassa
      * @return siirron pituus Ruutujen lukumääränä.
      */
-    private int siirronPituus(Vanki vanki, int sarake) {
+    public int siirronPituus(Vanki vanki, int sarake) {
 
         if (vanki.getSijainti() == null) {
             return (this.riviNro + 1);
         } else if (vanki.getSijainti().getRiviNro() == this.riviNro) {
-            if (sarake - vanki.getSijainti().getSarake() >= 0) {
+            if (sarake - vanki.getSijainti().getSarake() > 0) {
                 return (sarake - vanki.getSijainti().getSarake());
             } else {
                 return (vanki.getSijainti().getSarake() - sarake);
             }
         } else { //Liikutaan sarakkeella
-            if (this.riviNro - vanki.getSijainti().getRiviNro() >= 0) {
+            if (this.riviNro - vanki.getSijainti().getRiviNro() > 0) {
                 return (this.riviNro - vanki.getSijainti().getRiviNro());
             } else {
                 return (vanki.getSijainti().getRiviNro() - this.riviNro);
@@ -170,7 +170,7 @@ public class Rivi {
      * @param vanki Vanki-nappula, joka liikkui
      * @param sarake Ruudun sarake, johon Vanki liikkui
      */
-    protected void liikutaVartijaa(Vanki vanki, int pituus) {
+    public void liikutaVartijaa(Vanki vanki, int pituus) {
 
         int min, max, uusi;
         

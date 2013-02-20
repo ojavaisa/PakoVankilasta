@@ -54,7 +54,6 @@ public class Ruutu {
      */
     //HUOMHUOM! Nyt asettaa nappulan joka tapauksessa! Asettamisen sallimistarkastus jossain muualla!
     public void setNappula(Pelinappula nappula) { 
-        
         this.nappula = nappula;
     }
 

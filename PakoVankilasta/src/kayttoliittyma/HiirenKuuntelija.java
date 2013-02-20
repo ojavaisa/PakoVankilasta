@@ -3,7 +3,6 @@ package kayttoliittyma;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import pakovankilasta.Pelilauta;
 
 /**
  *
@@ -12,11 +11,14 @@ import pakovankilasta.Pelilauta;
 public class HiirenKuuntelija implements MouseListener {
     
     private Component component;
-    private Pelilauta lauta;
+    private Peli peli;
+    private boolean vankiValittu;
+
     
-    public HiirenKuuntelija(Pelilauta lauta, Component component) {
-        this.lauta = lauta;
+    public HiirenKuuntelija(Peli peli, Component component) {
+        this.peli = peli;
         this.component = component;
+        this.vankiValittu = false;
     }
 
     @Override
@@ -46,8 +48,26 @@ public class HiirenKuuntelija implements MouseListener {
         
         x = e.getX();
         y = e.getY();
-        sarake = lauta.muunnaX(x);
-        rivi = lauta.muunnaY(y);
+        sarake = this.peli.getLauta().muunnaX(x);
+        rivi = this.peli.getLauta().muunnaY(y);
+
+        if(vankiValittu) {
+            if(this.peli.vuoro(rivi, sarake)) {
+                vankiValittu = false;
+            }
+            //valitaan kohderuutu
+            //kohteen tarkistus:ok->siirto->vankivalittu=false
+            //vangin vaihto
+            //kohteen tarkistus:ei ok->ei tehdä mitään->seuraava klikkaus
+        } else {
+            //valitaan siirrettävä vanki
+            if(this.peli.valitseVanki(rivi, sarake)) {
+                this.vankiValittu = true;
+            } else {
+                this.vankiValittu = false;
+            }
+        }
+        
         if(rivi >= 0 && rivi < 99 && sarake >= 0) {
             System.out.println("Ruutu (" + sarake + "," + rivi +")");
 //            Ruutu valinta = lauta.getRivi(rivi).getRuutu(sarake);
@@ -58,7 +78,7 @@ public class HiirenKuuntelija implements MouseListener {
         } else {
             System.out.println("Laudan ulkopuolella");
         }
-        
+        component.repaint();
 
     }
 }

@@ -43,13 +43,8 @@ public class PelaajaTest {
      * laudalla-metodin testaus Vangeille, jotka eivät ole laudalla
      */
     @Test
-    public void testLaudallaNull() {
+    public void testJaljella() {
         
-        boolean oikea = false;
-        boolean tulos;
-        for(int i=0; i<4; i++){
-            tulos = pelaaja.laudalla(i);
-            assertEquals(oikea, tulos);
-        }
+
     }
 }

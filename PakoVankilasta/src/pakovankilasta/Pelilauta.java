@@ -16,7 +16,6 @@ public class Pelilauta {
 
     private int leveys;
     private Rivi[] rivit; //ArrayList tai vast?
-    private Pelaaja[] pelaajat;
     
     private static int ruudunKoko = 20;  //HUOMHUOM! Tarkista nää vrt. piirtoalustan koordinaatit + linux vs. windows
     private static int vasenReuna = 58;  //Linuxilla 51?
@@ -29,17 +28,13 @@ public class Pelilauta {
      * 
      * @param koko pelaajan antama laudan leveys
      */
-    public Pelilauta(int koko, int pelaajat) {
+    public Pelilauta(int koko) {
 
         this.leveys = koko;
 
         this.rivit = new Rivi[this.leveys + 1]; 
         luoRivit(rivit);
         
-        this.pelaajat = new Pelaaja[pelaajat];
-        for(int i=0; i<pelaajat; i++){
-            this.pelaajat[i] = new Pelaaja(i);
-        }
     }
 
     /**
@@ -72,8 +67,7 @@ public class Pelilauta {
      * @param kohde kohteena oleva Ruutu, johon ollaan siirtymässä
      * @return totuusarvo, siitä onko siirto sallittu
      */
-    //Siirtyminen samaan ruutuun??? Tässä tarkistus? (lisää myös testiin jos näin)
-    protected boolean siirtoSallittu(Vanki vanki, Ruutu kohde) {
+    public boolean siirtoSallittu(Vanki vanki, Ruutu kohde) {
         
         int rivi = kohde.getRiviNro();
         int sarake = kohde.getSarake();
@@ -100,7 +94,7 @@ public class Pelilauta {
      * @param kohde kohteena oleva Ruutu, johon ollaan siirtymässä
      * @return totuusarvo true, jos edessä ei ole vartijoita
      */
-    protected boolean reittiVapaa(Vanki vanki, Ruutu kohde) {
+    public boolean reittiVapaa(Vanki vanki, Ruutu kohde) {
 
         int rivi = kohde.getRiviNro();
         int sarake = kohde.getSarake();
@@ -226,15 +220,7 @@ public class Pelilauta {
     public int getKoko() {
         return this.rivit.length;
     }
-    
-    public int getPelaajia() {
-        return this.pelaajat.length;
-    }
-    
-    public Pelaaja getPelaaja(int nro) {
-        return this.pelaajat[nro];
-    }
-    
+
     public int muunnaX(int x) {
         
         if(x<vasenReuna || x>(this.leveys*ruudunKoko+vasenReuna)) {

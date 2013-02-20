@@ -12,3 +12,8 @@ to 31.1.	5h: Nappuloiden liikuttelulogiikka valmis? (Puuttuu enää pelaajan mui
 ti 5.2.		2h: Käyttöliittymä-luokka aloitettu. Alustavat JavaDocit kirjoitettu luokille
 			5h: Testejä luokille ja metodeille
 ke 6.2.		4h: Graafisen käyttöliittymän aloitus
+to 7.2.		6h: Hiirenkuuntelija, ohjaustunti, koordinaatit toimivat
+pe 8.2.		3h: Koodikatselmointi
+ti 12.2.	3h: Käyttöliittymäluokat jaettu omaan pakettiin, piirtäminen Piirtoalustalle
+ke 13.2.	2h: Ohjaustunti, käyttöliittymän muokkausta
+ke 20.2.	9h: Käyttöliittymän toimimaan saaminen, ensimmäinen pelattava versio!

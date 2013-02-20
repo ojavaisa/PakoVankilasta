@@ -38,7 +38,7 @@ public class VartijaTest {
         ruutu1 = new Ruutu(1, 1, false);
         ruutu2 = new Ruutu(2, 1, false);
         vartija = new Vartija(ruutu1);
-        vanki = new Vanki(0);
+        vanki = new Vanki();
         nappula = new Pelinappula();
     }
     

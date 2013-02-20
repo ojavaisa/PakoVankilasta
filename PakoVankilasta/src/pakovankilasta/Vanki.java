@@ -14,18 +14,16 @@ public class Vanki extends Pelinappula {
      * Vanki kuuluu tietylle Pelaajalle.
      */
     private Pelaaja pelaaja;
-    private int vanginNro;
 
-    public Vanki(int nro) {
+    public Vanki() {
         super();
-        this.vanginNro = nro;
     }
     
-    protected Pelaaja getPelaaja() {
+    public Pelaaja getPelaaja() {
         return this.pelaaja;
     }
     
-    protected void setPelaaja(Pelaaja pelaaja){
+    public void setPelaaja(Pelaaja pelaaja){
         this.pelaaja = pelaaja;
     }
     
