@@ -4,11 +4,12 @@ package kayttoliittyma;
  *
  * @author $Olli Väisänen
  */
+import java.util.Random;
 import java.util.Scanner;
 import pakovankilasta.Pelaaja;
 import pakovankilasta.Pelilauta;
-import pakovankilasta.Ruutu;
 import pakovankilasta.Pelinappula;
+import pakovankilasta.Ruutu;
 import pakovankilasta.Vanki;
 
 public class Peli {
@@ -19,6 +20,7 @@ public class Peli {
     private int pelaajaNro;
     protected Vanki valittu;
     private static Scanner lukija = new Scanner(System.in);
+    private static Random noppa = new Random();
     protected boolean kesken = true;
 
     public Peli() {
@@ -50,6 +52,7 @@ public class Peli {
                 this.kesken = veneSiirto();
                 this.valittu = null;
                 if(this.kesken == true) {
+                    halytys();
                     seuraavaPelaaja();
                 }
                 return true;
@@ -80,6 +83,21 @@ public class Peli {
         this.vuorossa = this.pelaajat[pelaajaNro];
         System.out.println("Pelaaja " + (pelaajaNro + 1));
     }
+    
+    private void halytys() {
+        int rivi = noppa.nextInt(this.lauta.getKoko()-2) + 1; //arvotaan rivinumero väliltä 1-viimeinen rivi
+        boolean suunta = noppa.nextBoolean();
+        int pituus;
+        
+        if(suunta) {
+            pituus = this.lauta.getRivi(rivi).getKoko() - this.lauta.getRivi(rivi).getVartija().getSijainti().getSarake() - 1;
+        } else {
+            pituus = this.lauta.getRivi(rivi).getVartija().getSijainti().getSarake();
+        }
+        this.lauta.getRivi(rivi).liikutaVartijaa(suunta, pituus);
+        System.out.println("Vanki aiheutti hälytyksen! Rivin " + (rivi+1) + " vartija liikkui!");
+        
+    }
 
     private boolean tarkistaSiirto(Ruutu kohde) {
 
@@ -93,7 +111,12 @@ public class Peli {
             if (kohde.getRiviNro() > 0) {
                 int rivi = kohde.getRiviNro();
                 int sarake = kohde.getSarake();
-                return this.lauta.getRivi(rivi).vartijaEiSyo(this.valittu, sarake);
+                if(!this.lauta.getRivi(rivi).vartijaEiSyo(this.valittu, sarake)) {
+                    System.out.println("Siirto ei onnistu. Vartija saisi vankisi kiinni!");
+                    return false;
+                } else {
+                    return true;
+                }
             } else {
                 return true;
             }
@@ -121,10 +144,16 @@ public class Peli {
         int rivi = kohde.getRiviNro();
         int sarake = kohde.getSarake();
         int pituus = this.lauta.getRivi(rivi).siirronPituus(this.valittu, sarake);
+        boolean suunta;
+        if(sarake > this.lauta.getRivi(rivi).getVartija().getSijainti().getSarake()) {
+            suunta = true; //true tarkoittaa oikeaa laitaa
+        } else {
+            suunta = false; //false tarkoittaa vasenta laitaa
+        }
 
         if (rivi != 0) {
             this.valittu.liiku(kohde);
-            this.lauta.getRivi(rivi).liikutaVartijaa(valittu, pituus);
+            this.lauta.getRivi(rivi).liikutaVartijaa(suunta, pituus);
         } else { //rivi==0
             this.valittu.liiku(kohde);
         }

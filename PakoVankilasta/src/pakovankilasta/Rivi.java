@@ -1,7 +1,6 @@
 package pakovankilasta;
 
 //import java.awt.Graphics;
-
 /**
  * Pako vankilasta-pelin lauta muodostuu Riveistä, jotka ovat Ruutu-taulukoita.
  * Rivillä on yksi Vartija (lukuunottamatta ensimmäistä riviä, jolla ei ole
@@ -122,17 +121,33 @@ public class Rivi {
             if (sarake > vartijanSarake) {
                 if ((vartijanSarake + siirronPituus(vanki, sarake)) >= sarake) {
                     return false;
-                } else { //vartijanSarake + siirronPituus < sarake
-                    return true;
                 }
             } else { //sarake < vartijanSarake
                 if ((vartijanSarake - siirronPituus(vanki, sarake)) <= sarake) {
                     return false;
-                } else { //vartijanSarake - siirronPituus > sarake
-                    return true;
+                }
+            }
+            return vartijaEiSyoMuita(vanki, sarake);
+        }
+    }
+
+    private boolean vartijaEiSyoMuita(Vanki vanki, int sarake) {
+        Pelaaja pelaaja = vanki.getPelaaja();
+        int vartijanSarake = getVartija().getSijainti().getSarake();
+
+        for (int i = 0; i < pelaaja.getJaljella(); i++) {
+            if (pelaaja.getVanki(i).getSijainti() != null) {
+                if (pelaaja.getVanki(i).getSijainti().getRiviNro() == this.riviNro) {
+                    int vanginSarake = pelaaja.getVanki(i).getSijainti().getSarake();
+                    if(sarake > vartijanSarake && vanginSarake > vartijanSarake && vanginSarake < sarake) {
+                        return false;
+                    } else if (sarake < vartijanSarake && vanginSarake < vartijanSarake && vanginSarake > sarake) {
+                        return false;
+                    }
                 }
             }
         }
+        return true;
     }
 
     /**
@@ -170,11 +185,11 @@ public class Rivi {
      * @param vanki Vanki-nappula, joka liikkui
      * @param sarake Ruudun sarake, johon Vanki liikkui
      */
-    public void liikutaVartijaa(Vanki vanki, int pituus) {
+    public void liikutaVartijaa(boolean suunta, int pituus) {
 
         int min, max, uusi;
-        
-        if (vanki.getSijainti().getSarake() > this.vartija.getSijainti().getSarake()) {
+
+        if (suunta) {
             min = this.vartija.getSijainti().getSarake();
             max = min + pituus;
             uusi = max;
@@ -183,12 +198,12 @@ public class Rivi {
             min = max - pituus;
             uusi = min;
         }
-        
-        for(int i=min; i<=max; i++){ //Tarkistetaan matkan varrella olevat Vangit
-                if (this.ruudut[i].getNappula() != null) {
-                    this.ruudut[i].setNappulaNull();
-                }
+
+        for (int i = min; i <= max; i++) { //Tarkistetaan matkan varrella olevat Vangit
+            if (this.ruudut[i].getNappula() != null) {
+                this.ruudut[i].setNappulaNull();
             }
+        }
         this.vartija.liiku(this.ruudut[uusi]);
     }
 
@@ -231,7 +246,6 @@ public class Rivi {
 
         return rivi;
     }
-    
 //    public void piirra(Graphics g) {
 //        for(int i=0; i<ruudut.length; i++){
 //            ruudut[i].piirra(g);

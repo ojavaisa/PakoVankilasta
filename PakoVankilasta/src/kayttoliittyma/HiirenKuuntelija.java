@@ -48,30 +48,28 @@ public class HiirenKuuntelija implements MouseListener {
         sarake = this.peli.getLauta().muunnaX(x);
         rivi = this.peli.getLauta().muunnaY(y);
 
-        if(this.kesken) {
-            if (vankiValittu) {
-                if (rivi == -1) {
+        if (this.kesken) {
+            if (sarake != -1) {
+                if (vankiValittu) {
+                    if (rivi == -1) {
+                        if (this.peli.valitseVanki(rivi, sarake)) {
+                            this.vankiValittu = true;
+                        } else {
+                            this.vankiValittu = false;
+                        }
+                    } else if (this.peli.valitseVanki(rivi, sarake)) {
+                        this.vankiValittu = true;
+                    } else if (this.peli.vuoro(rivi, sarake)) {
+                        this.kesken = this.peli.kesken;
+                        vankiValittu = false;
+                    }
+                } else {
+                    //valitaan siirrettävä vanki
                     if (this.peli.valitseVanki(rivi, sarake)) {
                         this.vankiValittu = true;
                     } else {
                         this.vankiValittu = false;
                     }
-                } else if (this.peli.valitseVanki(rivi, sarake)) {
-                    this.vankiValittu = true;
-                } else if (this.peli.vuoro(rivi, sarake)) {
-                    this.kesken = this.peli.kesken;
-                    vankiValittu = false;
-                }
-                //valitaan kohderuutu
-                //kohteen tarkistus:ok->siirto->vankivalittu=false
-                //vangin vaihto
-                //kohteen tarkistus:ei ok->ei tehdä mitään->seuraava klikkaus
-            } else {
-                //valitaan siirrettävä vanki
-                if (this.peli.valitseVanki(rivi, sarake)) {
-                    this.vankiValittu = true;
-                } else {
-                    this.vankiValittu = false;
                 }
             }
         }

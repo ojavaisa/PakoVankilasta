@@ -17,3 +17,6 @@ pe 8.2.		3h: Koodikatselmointi
 ti 12.2.	3h: Käyttöliittymäluokat jaettu omaan pakettiin, piirtäminen Piirtoalustalle
 ke 13.2.	2h: Ohjaustunti, käyttöliittymän muokkausta
 ke 20.2.	9h: Käyttöliittymän toimimaan saaminen, ensimmäinen pelattava versio!
+			3h: Lisää käyttöliittymän muokkausta
+to 21.2.	4h: Pelin toiminnallisuus hälytystä lukuunottamatta valmis, Demotilaisuus
+			3h: Pelin virheettömän toiminnan varmistus, virheiden korjailua, loput perustoiminnallisuudesta
