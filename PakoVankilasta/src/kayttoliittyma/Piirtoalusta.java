@@ -108,8 +108,17 @@ public class Piirtoalusta extends JPanel {
         g.setColor(Color.BLACK);
         g.drawRect(x, y, leveys, ruudunKoko);
         
+        x = vasenReuna + (leveys / 2) + 5;
+        y = alaReuna - (this.peli.getLauta().getKoko() * ruudunKoko + 10) + 5;
         for (int i = 0; i < this.peli.getPelaajat().length; i++) {
             int veneessa = (4 - this.peli.getPelaaja(i).getJaljella());
+            for(int j = 0; j < veneessa; j++) {
+                asetaVari(g, i);
+                g.fillOval(x, y, 11, 11);
+                g.setColor(Color.BLACK);
+                g.drawOval(x, y, 11, 11);
+                x = x + 15;
+            }
         }
     }
 

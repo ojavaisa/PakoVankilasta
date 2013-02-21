@@ -19,7 +19,7 @@ public class Peli {
     private int pelaajaNro;
     protected Vanki valittu;
     private static Scanner lukija = new Scanner(System.in);
-    boolean kesken = true;
+    protected boolean kesken = true;
 
     public Peli() {
 
@@ -49,7 +49,9 @@ public class Peli {
             if (tarkistaVeneSiirto()) {
                 this.kesken = veneSiirto();
                 this.valittu = null;
-                seuraavaPelaaja();
+                if(this.kesken == true) {
+                    seuraavaPelaaja();
+                }
                 return true;
             } else {
                 return false;
@@ -133,7 +135,7 @@ public class Peli {
         this.vuorossa.siirraVeneeseen(this.valittu);
         //halytys()
         if (vuorossa.getJaljella() == 1) {
-            System.out.println("Pelaaja " + pelaajaNro + " voitti!");
+            System.out.println("Pelaaja " + (pelaajaNro+1) + " voitti!");
             return false;
         } else {
             return true;
