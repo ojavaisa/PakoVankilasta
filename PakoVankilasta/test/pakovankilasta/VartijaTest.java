@@ -70,9 +70,6 @@ public class VartijaTest {
         Pelinappula tulos2 = ruutu2.getNappula();
         assertEquals(oikea2, tulos2);
         
-        oikea2 = null;
-        tulos2 = ruutu1.getNappula();
-        assertEquals(oikea2, tulos2);
     }
     
     public void testLiikuVankiin() {
@@ -93,7 +90,6 @@ public class VartijaTest {
         assertEquals(oikea2, tulos2);
     }
     
-    //Tarvitaanko?
     public void testLiikuNappulaan() {
         
         nappula.liiku(ruutu2);

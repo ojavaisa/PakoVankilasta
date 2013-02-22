@@ -15,6 +15,7 @@ public class RiviTest {
 
     Rivi rivi0, rivi1, rivi9;
     int koko = 9;
+    Pelaaja pelaaja;
     Vanki vanki;
 
     public RiviTest() {
@@ -36,7 +37,8 @@ public class RiviTest {
         rivi1.asetaVartija();
         rivi9 = new Rivi(koko, 9);
         rivi9.asetaVartija();
-        vanki = new Vanki();
+        pelaaja = new Pelaaja(0);
+        vanki = pelaaja.getVanki(0);
     }
 
     @After

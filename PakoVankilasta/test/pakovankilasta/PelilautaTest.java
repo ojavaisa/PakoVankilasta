@@ -57,7 +57,6 @@ public class PelilautaTest {
             tulos = lauta.getRivi(i).getRiviNro();
             assertEquals(i, tulos);
         }
-        //asetaVartija-metodin testaus RiviTest-luokassa?
     }
 
     /**
@@ -73,7 +72,6 @@ public class PelilautaTest {
         vanki.liiku(lauta.getRivi(0).getRuutu(4));
 
         //Yritetään liikkua muualle kuin samalle riville tai sarakkeelle
-        //Liikkuminen samaan ruutuun???
         for (int i = 1; i < lauta.getKoko(); i++) {
             for (int j = 0; j < lauta.getKoko() - 1; j++) {
                 if (j != 4) {

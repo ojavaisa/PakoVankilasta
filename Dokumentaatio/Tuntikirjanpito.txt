@@ -20,3 +20,5 @@ ke 20.2.	9h: Käyttöliittymän toimimaan saaminen, ensimmäinen pelattava versi
 			3h: Lisää käyttöliittymän muokkausta
 to 21.2.	4h: Pelin toiminnallisuus hälytystä lukuunottamatta valmis, Demotilaisuus
 			3h: Pelin virheettömän toiminnan varmistus, virheiden korjailua, loput perustoiminnallisuudesta
+pe 22.2. 	6h: Dokumentaatio kirjoitettu testausdokumenttia lukuunottamatta
+			2h: Testien kirjoittelua

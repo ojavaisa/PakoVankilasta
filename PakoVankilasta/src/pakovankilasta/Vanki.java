@@ -16,7 +16,7 @@ public class Vanki extends Pelinappula {
         super();
     }
     
-    public Pelaaja getPelaaja() {
+    protected Pelaaja getPelaaja() {
         return this.pelaaja;
     }
     

@@ -49,7 +49,7 @@ public class Ruutu {
      *
      * @param nappula nappula-muuttujan uusi arvo
      */
-    public void setNappula(Pelinappula nappula) { 
+    protected void setNappula(Pelinappula nappula) { 
         this.nappula = nappula;
     }
 
