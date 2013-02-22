@@ -5,14 +5,28 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- *
+ * Hiirenkuuntelija-luokka hoitaa graafisen käyttöliittymän komentojen kuuntelun.
+ * 
  * @author $Olli Väisänen
  */
 public class HiirenKuuntelija implements MouseListener {
 
+    /**
+     * Hiirenkuuntelija-luokalle onnetaan Piirtoalusta-olio repaint[]-metodia varten. 
+     * Pelilauta piirretään uudelleen jokaisen klikkauksen jälkeen.
+     */
     private Component component;
+    /**
+     * Peli-luokka hoitaa pelin pyörittämisen.
+     */
     private Peli peli;
+    /**
+     * Hiiren klikkauksen toiminto riippuu siitä onko liikutettava vanki valittu vai ei
+     */
     private boolean vankiValittu;
+    /**
+     * Hiiri reagoi vain jos peli on kesken.
+     */
     private boolean kesken;
 
     public HiirenKuuntelija(Peli peli, Component component) {

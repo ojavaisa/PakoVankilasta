@@ -1,11 +1,8 @@
 package pakovankilasta;
 
-//import java.awt.Graphics;
-
 /**
  * Pelilauta-luokka muodostaa pelin laudan. Pelilauta koostuu Riveistä.
  * Pelilaudan leveyden määrittää käyttäjän antama parametri koko. 
- * //jotain pakoruutujen ja vartijoiden sijainneista?
  *
  * @see pakovankilasta.Rivi
  *
@@ -15,9 +12,17 @@ package pakovankilasta;
 public class Pelilauta {
 
     private int leveys;
-    private Rivi[] rivit; //ArrayList tai vast?
     
-    private static int ruudunKoko = 20;  //HUOMHUOM! Tarkista nää vrt. piirtoalustan koordinaatit + linux vs. windows
+    /**
+     * Pelilaudan muodostava Rivien taulukko.
+     */
+    private Rivi[] rivit;
+    
+    /*
+     * Nämä luvut liittyvät Hiirenkuuntelija-luokalta saatujen koordinaattien muuttamiseen laudan
+     * rivien ja sarakkeiden numeroiksi.
+     */
+    private static int ruudunKoko = 20;
     private static int vasenReuna = 58;  //Linuxilla 51?
     private static int alaReuna = 450;   //Linuxilla 448?
 
@@ -26,7 +31,7 @@ public class Pelilauta {
      * pelaajan antama pariton luku väliltä 5..15. Pelilaudan korkeus on yhtä suurempi,
      * sillä laudan alin rivi (kauimpana venettä) on Vartijaton, "turvallinen" Rivi.
      * 
-     * @param koko pelaajan antama laudan leveys
+     * @param koko Pelaajan antama laudan leveys
      */
     public Pelilauta(int koko) {
 
@@ -43,7 +48,6 @@ public class Pelilauta {
      * (Rivi-luokan metodilla asetaVartija).
      *
      * @see pakovankilasta.Rivi
-     * @see pakovankilasta.Rivi#asetaVartija(int)
      *
      * @param rivit Pelilaudan muodostava Rivien taulukko
      */
@@ -88,7 +92,7 @@ public class Pelilauta {
      * reittiVapaa-metodi tarkistaa että kohteena oleva Ruutu on vapaa ja ettei siirron
      * tiellä ole Vartijoita. Edessä olevat Vanki-nappulat eivät estä siirtoa (paitsi
      * kohteena olevassa Ruudussa). Tarkistus tapahtuu siirron tyypistä riippuvalla
-     * metodilla.
+     * alimetodilla.
      *
      * @param vanki Vanki, jota halutaan liikuttaa
      * @param kohde kohteena oleva Ruutu, johon ollaan siirtymässä
@@ -109,7 +113,7 @@ public class Pelilauta {
             } else if (vanki.getSijainti().getRiviNro() == rivi) {
                 return riviSiirto(vanki, sarake);
             } else {
-                System.out.println("You're not supposed to get here!");
+                //Tänne ei pitäisi missään tilanteessa päästä
                 return false;
             }
         }
@@ -134,7 +138,8 @@ public class Pelilauta {
 
     /**
      * sarakeSiirto-metodi on reittiVapaa-metodin käyttämä tarkistus siirrolle,
-     * joka tehdään pitkin saraketta (pystysuora siirto).
+     * joka tehdään pitkin saraketta (pystysuora siirto). Itse sarakkeen tarkistus 
+     * tehdään erillisellä metodilla, sarakeSiirto()-metodi tarkistaa rivien suuruusjärjestyksen.
      * 
      * @param vanki Vanki-nappula jota ollaan liikuttamassa
      * @param rivi kohderivi, jolle ollaan menossa
@@ -150,7 +155,7 @@ public class Pelilauta {
                 lahtoRivi++; //Riviä 0 ei tarvitse tarkistaa
             }
             return tarkistaSarake(sarake, lahtoRivi, rivi);
-        } else { //lahtoRivi > rivi (lahtoRivi == rivi)-tapaus käsitellään muualla?
+        } else { //lahtoRivi > rivi 
             if(rivi == 0) {
                 rivi++; //Riviä 0 ei tarvitse tarkistaa
             }
@@ -158,6 +163,14 @@ public class Pelilauta {
         }
     }
     
+    /**
+     * tarkistaSarake() on sarakeSiirto()-metodin käyttämä alimetodi.
+     * 
+     * @param sarake Tarkistettavan sarakkeen numero
+     * @param rivi1 Lähtö- ja kohderivistä alempi
+     * @param rivi2 Lähtö- ja kohderivistä ylempi
+     * @return Totuusarvo onko sarakesiirto sallittu
+     */
     private boolean tarkistaSarake(int sarake, int rivi1, int rivi2) {
         int vartijanSarake;
         
@@ -196,7 +209,7 @@ public class Pelilauta {
                 }
             }
             return true;
-        } else { //lahtoSarake > sarake (lahtoSarake == sarake)-tapaus käsitellään muualla?
+        } else { //lahtoSarake > sarake
             for (int i = lahtoSarake; i >= sarake; i--) {
                 if (vartijanSarake == i) {
                     return false;
@@ -226,15 +239,30 @@ public class Pelilauta {
         return this.rivit.length;
     }
 
+    /**
+     * muunnaX() muuttaa pikseleinä annetun x-koordinaatin laudan sarakenumeroksi.
+     * Jos klikkaus on laudan ulkopuolella vaakasuunnassa, palautetaan arvo -1.
+     * 
+     * @param x Annettu x-koordinaatti pikseleinä
+     * @return (Ruudun) sarakenumero
+     */
     public int muunnaX(int x) {
         
-        if(x<vasenReuna || x>(this.leveys*ruudunKoko+vasenReuna)) {
+        if(x<vasenReuna || x>(this.leveys*ruudunKoko+vasenReuna)) { 
             return -1;
         } else {
             return (int) ((x - vasenReuna) / ruudunKoko);
         }
     }
     
+    /**
+     * muunnaY() muuttaa pikseleinä annetun y-koordinaatin laudan rivinumeroksi.
+     * Jos klikkaus on laudan alapuolella (selli), palautetaan arvo -1.
+     * Jos klikkaus on laudan yläpuolella (pakovene), palautetaan arvo 99.
+     * 
+     * @param y Annettu y-koordinaatti pikseleinä
+     * @return (Ruudun) rivinumero
+     */
     public int muunnaY(int y) {
         
         if(y>alaReuna){
@@ -264,18 +292,4 @@ public class Pelilauta {
         return lauta;
     }
     
-//    public void piirra(Graphics g) {
-//        for(int i=0; i<rivit.length; i++){
-//            rivit[i].piirra(g);
-//            if(i!=0){
-//                rivit[i].getVartija().piirra(g);                
-//            }
-//        }
-//        for(int i=0; i<pelaajat.length; i++){
-//            for(int j=0; j<4; j++) {
-//                pelaajat[i].getVanki(j).piirra(g);
-//            }
-//        }
-//        
-//    }
 }

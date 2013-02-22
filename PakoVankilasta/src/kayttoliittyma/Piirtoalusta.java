@@ -3,16 +3,19 @@ package kayttoliittyma;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-//import pakovankilasta.Pelilauta;
 
 /**
- *
+ * Piirtoalusta-luokka vastaa pelin (pelilaudan ja nappuloiden) piirtämisestä.
+ * 
  * @author $Olli Väisänen
  */
 public class Piirtoalusta extends JPanel {
 
-//    private Pelilauta lauta;
     private Peli peli;
+    
+    /**
+     * Muuttujat pelilaudan paikan ja koon määrittämiseen
+     */
     private static int ruudunKoko = 20;
     private static int vasenReuna = 50;
     private static int alaReuna = 400; //todellisuudessa alimman rivin yläkulma

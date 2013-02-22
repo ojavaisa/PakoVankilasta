@@ -22,7 +22,7 @@ public class Vartija extends Pelinappula {
     @Override
     public void liiku(Ruutu kohde) {
         
-        //this.getSijainti().setNappulaNull(); //Miks tämä aiheutti ongelman???
+        //this.getSijainti().setNappulaNull(); //Miks tämä aiheutti ongelman?
         kohde.setNappula(this);
         this.setSijainti(kohde);
        

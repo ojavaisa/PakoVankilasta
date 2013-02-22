@@ -1,9 +1,5 @@
 package kayttoliittyma;
 
-/**
- *
- * @author $Olli Väisänen
- */
 import java.util.Random;
 import java.util.Scanner;
 import pakovankilasta.Pelaaja;
@@ -12,13 +8,33 @@ import pakovankilasta.Pelinappula;
 import pakovankilasta.Ruutu;
 import pakovankilasta.Vanki;
 
+/**
+ * Peli-luokka on pelin käyttöliittymän tärkein luokka. Se yhdistää käyttöliittymän
+ * ja pelilogiikan, pelaajien vuorottelusta, nappuloiden liikuttelusta, siirtojen tarkastuksista, ym.
+ * 
+ * @author $Olli Väisänen
+ */
 public class Peli {
 
+    /**
+     * Peli tuntee pelilaudan
+     */
     private Pelilauta lauta;
+    /**
+     * Peli tuntee pelaajat
+     */
     private Pelaaja[] pelaajat;
+    
+    /**
+     * Peli pitää kirjaa vuorossa olevasta pelaajasta sekä pelaajan valitsemasta vangista.
+     */
     private Pelaaja vuorossa;
     private int pelaajaNro;
+    /**
+     * Peli pitää kirjaa vuorossa olevan pelaajan valitsemasta vangista.
+     */
     protected Vanki valittu;
+    
     private static Scanner lukija = new Scanner(System.in);
     private static Random noppa = new Random();
     protected boolean kesken = true;
@@ -45,6 +61,15 @@ public class Peli {
 
     }
 
+    /**
+     * vuoro() on Hiirenkuuntelija-luokan käyttämä metodi. Kun Vanki on onnistuneesti valittu, suoritetaan vuoro.
+     * Rivi ja sarake saadaan Hiirenkuuntelijalta. Jos vuoro onnistuu, palautetaan arvona true. Jos Hiirenkuuntelija saa
+     * takaisin arvon false, seuraava hiiren klikkaus suorittaa metodin uudelleen.
+     * 
+     * @param rivi Rivinumero
+     * @param sarake Sarakenumero
+     * @return Totuusarvo, onnistuiko vuoro
+     */
     public boolean vuoro(int rivi, int sarake) {
 
         if (rivi == 99) {
@@ -75,6 +100,9 @@ public class Peli {
 
     }
 
+    /**
+     * Jos vuoro onnistuu, vuorossa olevaa pelaajaa vaihdetaan.
+     */
     private void seuraavaPelaaja() {
         pelaajaNro++;
         if (pelaajaNro >= this.pelaajat.length) {
@@ -84,6 +112,9 @@ public class Peli {
         System.out.println("Pelaaja " + (pelaajaNro + 1));
     }
     
+    /**
+     * Jos pelaaja siirtää vangin veneeseen, tapahtuu hälytys ja satunnaisen rivin Vartija liikkuu Rivinsä laitaan.
+     */
     private void halytys() {
         int rivi = noppa.nextInt(this.lauta.getKoko()-2) + 1; //arvotaan rivinumero väliltä 1-viimeinen rivi
         boolean suunta = noppa.nextBoolean();
@@ -99,6 +130,12 @@ public class Peli {
         
     }
 
+    /**
+     * tarkistaSiirto()-metodi tarkistaa että siirto on kaikin puolin sallittu.
+     * 
+     * @param kohde Siirron kohteena oleva Ruutu
+     * @return Totuusarvo, onko siirto sallittu.
+     */
     private boolean tarkistaSiirto(Ruutu kohde) {
 
         if (this.valittu.getSijainti() == kohde) { //tarkistetaan että pelaaja ei yritä liikkua samaan ruutuun jossa jo on
@@ -123,6 +160,11 @@ public class Peli {
         }
     }
 
+    /**
+     * Venesiirto tarkistetaan tavallisesta siirrosta poikkeavasti.
+     * 
+     * @return Totuusarvo, onko siirto sallittu.
+     */
     private boolean tarkistaVeneSiirto() {
 
         int sarake = this.valittu.getSijainti().getSarake();
@@ -139,6 +181,11 @@ public class Peli {
         }
     }
 
+    /**
+     * Itse vangin siirto tapahtuu tällä metodilla.
+     * 
+     * @param kohde Siirron kohteena oleva Ruutu.
+     */
     private void siirto(Ruutu kohde) {
 
         int rivi = kohde.getRiviNro();
@@ -159,6 +206,11 @@ public class Peli {
         }
     }
 
+    /**
+     * Venesiirto poikkeaa tavallisesta siirrosta.
+     * 
+     * @return Totuusarvo siitä, jatkuuko peli edelleen.
+     */
     private boolean veneSiirto() {
         this.valittu.getSijainti().setNappulaNull();
         this.vuorossa.siirraVeneeseen(this.valittu);

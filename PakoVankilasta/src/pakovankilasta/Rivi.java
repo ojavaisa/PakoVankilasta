@@ -1,10 +1,12 @@
 package pakovankilasta;
 
-//import java.awt.Graphics;
 /**
  * Pako vankilasta-pelin lauta muodostuu Riveistä, jotka ovat Ruutu-taulukoita.
  * Rivillä on yksi Vartija (lukuunottamatta ensimmäistä riviä, jolla ei ole
  * Vartijaa), joka pystyy liikkumaan vain Rivillä.
+ * 
+ * @see pakovankilasta.Ruutu
+ * @see pakovankilasta.Vartija 
  *
  * @author $Olli Väisänen
  */
@@ -54,7 +56,7 @@ public class Rivi {
             kanta++;
         }
 
-        if ((kanta - 2 * (ruudut.length - this.riviNro)) > 0) { //
+        if ((kanta - 2 * (ruudut.length - this.riviNro)) > 0) {
             for (int i = 0; i < ruudut.length; i++) {
                 if (i < ((ruudut.length - (kanta - 2 * (ruudut.length - this.riviNro))) / 2)) {
                     ruudut[i] = new Ruutu(i, this.riviNro, false);
@@ -104,14 +106,15 @@ public class Rivi {
 
     /**
      * vartijaEiSyo-metodi tarkistaa, että Rivillä oleva Vartija-nappula ei saa
-     * liikutettavaa Vanki-nappulaa kiinni.
+     * liikutettavaa Vanki-nappulaa kiinni. vartijaEiSyo() tarkistaa että liikkumassa
+     * olevaa vankia ei syödä. Pelaajan muiden vankien turvassa pysyminen tarkistetaan
+     * erillisella metodilla.
      *
      * @param vanki Vanki-nappula, jota halutaan siirtää
      * @param sarake Rivin Ruutu (sarake), johon Vanki on siirtymässä
      * @return totuusarvo siitä, onko siirto sallittu (siirron on oltava
      * sellainen, että pelaajan omaa nappulaa ei syödä)
      */
-    //Tarkistaa tällä hetkellä vain että juuri liikkunutta Vankia ei syödä! pitää tarkistaa vielä muut saman pelaajan vangit!
     public boolean vartijaEiSyo(Vanki vanki, int sarake) {
 
         if (this.riviNro == 0) {
@@ -131,6 +134,15 @@ public class Rivi {
         }
     }
 
+    /**
+     * vartijaEiSyoMuita() tarkistaa, että pelaajan muut kuin juuri liikkumassa oleva
+     * Vanki pysyvät turvassa.
+     * 
+     * @param vanki Vanki jota ollaan liikuttamassa
+     * @param sarake Rivin Ruutu (sarake), johon Vanki on siirtymässä
+     * @return totuusarvo siitä, onko siirto sallittu (siirron on oltava
+     * sellainen, että pelaajan omaa nappulaa ei syödä)
+     */
     private boolean vartijaEiSyoMuita(Vanki vanki, int sarake) {
         Pelaaja pelaaja = vanki.getPelaaja();
         int vartijanSarake = getVartija().getSijainti().getSarake();
@@ -182,8 +194,8 @@ public class Rivi {
      * liikkuneen Vangin suuntaan. Liikkuvan Vartijan siirron varrella olevat
      * Vanki-nappulat joutuvat takaisin selliin.
      *
-     * @param vanki Vanki-nappula, joka liikkui
-     * @param sarake Ruudun sarake, johon Vanki liikkui
+     * @param suunta Totuusarvo liikkumisen suunnasta (arvo true vastaa oikeaa laitaa ja false vasenta)
+     * @param pituus Siirron pituus
      */
     public void liikutaVartijaa(boolean suunta, int pituus) {
 
@@ -246,10 +258,5 @@ public class Rivi {
 
         return rivi;
     }
-//    public void piirra(Graphics g) {
-//        for(int i=0; i<ruudut.length; i++){
-//            ruudut[i].piirra(g);
-//        }
-//        
-//    }
+
 }

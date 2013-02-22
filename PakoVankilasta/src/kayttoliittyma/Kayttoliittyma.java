@@ -1,18 +1,20 @@
 package kayttoliittyma;
 
+import java.awt.Container;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+//import java.awt.GridLayout;
+//import javax.swing.JLabel;
+//import javax.swing.JButton;
+//import javax.swing.JPanel;
+
 /**
+ * Kayttoliittyma-luokka on pääohjelmaluokan kutsuma luokka, joka luo graafisen käyttöliitymän
+ * komponentit.
  *
  * @author $Olli Väisänen
  */
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
 public class Kayttoliittyma implements Runnable {
 
         private JFrame frame;

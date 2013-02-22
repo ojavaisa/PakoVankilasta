@@ -1,16 +1,12 @@
 package pakovankilasta;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 /**
  * Pelinappula-luokka on pelissä käytettävien nappuloiden (Vartija ja Vanki) yliluokka.
  * Pelinappula sisältää tiedon Ruudusta, jossa nappula on.
  * 
  * @author Olli Väisänen
  */
-public class Pelinappula {
-//public abstract class Pelinappula { //Abstrakti luokka?
+public class Pelinappula { //Abstrakti luokka?
     
     /**
      * Ruutu, jossa Pelinappula sijaitsee. null-arvo tarkoittaa, että nappula ei ole 
@@ -49,8 +45,9 @@ public class Pelinappula {
             }
             kohde.setNappula(this);
             this.sijainti = kohde;
-        } else { //Tänne ei pitäisi päästä jos tarkistukset menee oikein.
-            System.out.println("Ruudussa on jo nappula!");
+        } else { 
+            //Tänne ei pitäisi päästä jos tarkistukset menee oikein.
+            //System.out.println("Ruudussa on jo nappula!");
         }
 
     }
@@ -62,11 +59,5 @@ public class Pelinappula {
     public Pelinappula() {
         this.sijainti = null;
     }
-    
-    //public abstract void piirra(Graphics g);
-    public void piirra(Graphics g){
-        
-    }
-
-        
+   
 }
