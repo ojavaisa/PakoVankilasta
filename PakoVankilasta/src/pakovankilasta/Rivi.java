@@ -4,9 +4,9 @@ package pakovankilasta;
  * Pako vankilasta-pelin lauta muodostuu Riveistä, jotka ovat Ruutu-taulukoita.
  * Rivillä on yksi Vartija (lukuunottamatta ensimmäistä riviä, jolla ei ole
  * Vartijaa), joka pystyy liikkumaan vain Rivillä.
- * 
+ *
  * @see pakovankilasta.Ruutu
- * @see pakovankilasta.Vartija 
+ * @see pakovankilasta.Vartija
  *
  * @author $Olli Väisänen
  */
@@ -43,7 +43,7 @@ public class Rivi {
     /**
      * luoRuudut-metodi on konstruktorin käyttämä metodi joka luo
      * ruudut-muuttujassa olevat tyhjät Ruudut, sekä määrittää pakoruutujen
-     * paikat.
+     * paikat. Jos Rivillä on pakoruutuja, Rivi luodaan erillisellä alimetodilla.
      *
      * @see pakovankilasta.Ruutu
      *
@@ -57,7 +57,28 @@ public class Rivi {
         }
 
         if ((kanta - 2 * (ruudut.length - this.riviNro)) > 0) {
+            luoPakoRuudut(kanta, ruudut);
+
+        } else {
             for (int i = 0; i < ruudut.length; i++) {
+                ruudut[i] = new Ruutu(i, this.riviNro, false);
+            }
+        }
+
+    }
+    
+    /**
+     * luoPakoRuudut on luoRuudut-metodin käyttämä metodi joka määrittää pakoruutujen
+     * paikat rivinumeron ja pakoruutujen muodostaman kannan pituuden avulla.
+     *
+     * @see pakovankilasta.Ruutu
+     *
+     * @param kanta Pakoruutujen muodostaman kolmion kannan pituus
+     * @param ruudut Rivin muodostava Ruutujen taulukko
+     */
+    private void luoPakoRuudut(int kanta, Ruutu[] ruudut) {
+        
+        for (int i = 0; i < ruudut.length; i++) {
                 if (i < ((ruudut.length - (kanta - 2 * (ruudut.length - this.riviNro))) / 2)) {
                     ruudut[i] = new Ruutu(i, this.riviNro, false);
                 } else if (i >= ((ruudut.length - (kanta - 2 * (ruudut.length - this.riviNro))) / 2) + (kanta - 2 * (ruudut.length - this.riviNro))) {
@@ -66,13 +87,6 @@ public class Rivi {
                     ruudut[i] = new Ruutu(i, this.riviNro, true);
                 }
             }
-
-        } else {
-            for (int i = 0; i < ruudut.length; i++) {
-                ruudut[i] = new Ruutu(i, this.riviNro, false);
-            }
-        }
-
     }
 
     /**
@@ -91,12 +105,10 @@ public class Rivi {
                 ruutuNro = ruudut.length - ((this.riviNro / 2) + 1);
                 this.vartija = new Vartija(ruudut[ruutuNro]);
                 ruudut[ruutuNro].setNappula(this.vartija);
-                //this.vartija.setRivi(this);
             } else {
                 ruutuNro = (this.riviNro / 2) - 1;
                 this.vartija = new Vartija(ruudut[ruutuNro]);
                 ruudut[ruutuNro].setNappula(this.vartija);
-                //this.vartija.setRivi(this);
             }
         } else {
             this.vartija = null; //Ensimmäiselle riville (kauimpana venettä) ei tule Vartijaa.
@@ -106,9 +118,9 @@ public class Rivi {
 
     /**
      * vartijaEiSyo-metodi tarkistaa, että Rivillä oleva Vartija-nappula ei saa
-     * liikutettavaa Vanki-nappulaa kiinni. vartijaEiSyo() tarkistaa että liikkumassa
-     * olevaa vankia ei syödä. Pelaajan muiden vankien turvassa pysyminen tarkistetaan
-     * erillisella metodilla.
+     * liikutettavaa Vanki-nappulaa kiinni. vartijaEiSyo() tarkistaa että
+     * liikkumassa olevaa vankia ei syödä. Pelaajan muiden vankien turvassa
+     * pysyminen tarkistetaan erillisella metodilla.
      *
      * @param vanki Vanki-nappula, jota halutaan siirtää
      * @param sarake Rivin Ruutu (sarake), johon Vanki on siirtymässä
@@ -135,9 +147,9 @@ public class Rivi {
     }
 
     /**
-     * vartijaEiSyoMuita() tarkistaa, että pelaajan muut kuin juuri liikkumassa oleva
-     * Vanki pysyvät turvassa.
-     * 
+     * vartijaEiSyoMuita() tarkistaa, että pelaajan muut kuin juuri liikkumassa
+     * oleva Vanki pysyvät turvassa.
+     *
      * @param vanki Vanki jota ollaan liikuttamassa
      * @param sarake Rivin Ruutu (sarake), johon Vanki on siirtymässä
      * @return totuusarvo siitä, onko siirto sallittu (siirron on oltava
@@ -149,12 +161,14 @@ public class Rivi {
 
         for (int i = 0; i < pelaaja.getJaljella(); i++) {
             if (pelaaja.getVanki(i).getSijainti() != null) {
-                if (pelaaja.getVanki(i).getSijainti().getRiviNro() == this.riviNro) {
-                    int vanginSarake = pelaaja.getVanki(i).getSijainti().getSarake();
-                    if(sarake > vartijanSarake && vanginSarake > vartijanSarake && vanginSarake < sarake) {
-                        return false;
-                    } else if (sarake < vartijanSarake && vanginSarake < vartijanSarake && vanginSarake > sarake) {
-                        return false;
+                if (pelaaja.getVanki(i) != vanki) {
+                    if (pelaaja.getVanki(i).getSijainti().getRiviNro() == this.riviNro) {
+                        int vanginSarake = pelaaja.getVanki(i).getSijainti().getSarake();
+                        if (sarake > vartijanSarake && vanginSarake > vartijanSarake && vanginSarake < sarake) {
+                            return false;
+                        } else if (sarake < vartijanSarake && vanginSarake < vartijanSarake && vanginSarake > sarake) {
+                            return false;
+                        }
                     }
                 }
             }
@@ -194,7 +208,8 @@ public class Rivi {
      * liikkuneen Vangin suuntaan. Liikkuvan Vartijan siirron varrella olevat
      * Vanki-nappulat joutuvat takaisin selliin.
      *
-     * @param suunta Totuusarvo liikkumisen suunnasta (arvo true vastaa oikeaa laitaa ja false vasenta)
+     * @param suunta Totuusarvo liikkumisen suunnasta (arvo true vastaa oikeaa
+     * laitaa ja false vasenta)
      * @param pituus Siirron pituus
      */
     public void liikutaVartijaa(boolean suunta, int pituus) {
@@ -210,13 +225,24 @@ public class Rivi {
             min = max - pituus;
             uusi = min;
         }
-
+        this.syoVangit(min, max);
+        this.vartija.liiku(this.ruudut[uusi]);
+    }
+    
+    /**
+     * syoVangit on liikutaVartijaa-metodin käyttämä metodi Vartijan matkan varrella olevien 
+     * Vankien passittamiseksi takaisin selliin.
+     * 
+     * @param min Vartijan siirron alaraja
+     * @param max Vartijan siirron yläraja
+     */
+    private void syoVangit(int min, int max) {
+        
         for (int i = min; i <= max; i++) { //Tarkistetaan matkan varrella olevat Vangit
             if (this.ruudut[i].getNappula() != null) {
                 this.ruudut[i].setNappulaNull();
             }
         }
-        this.vartija.liiku(this.ruudut[uusi]);
     }
 
     public int getRiviNro() {
@@ -258,5 +284,4 @@ public class Rivi {
 
         return rivi;
     }
-
 }

@@ -5,15 +5,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- * Hiirenkuuntelija-luokka hoitaa graafisen käyttöliittymän komentojen kuuntelun.
- * 
+ * Hiirenkuuntelija-luokka hoitaa graafisen käyttöliittymän komentojen
+ * kuuntelun.
+ *
  * @author $Olli Väisänen
  */
 public class HiirenKuuntelija implements MouseListener {
 
     /**
-     * Hiirenkuuntelija-luokalle onnetaan Piirtoalusta-olio repaint[]-metodia varten. 
-     * Pelilauta piirretään uudelleen jokaisen klikkauksen jälkeen.
+     * Hiirenkuuntelija-luokalle onnetaan Piirtoalusta-olio repaint[]-metodia
+     * varten. Pelilauta piirretään uudelleen jokaisen klikkauksen jälkeen.
      */
     private Component component;
     /**
@@ -21,7 +22,8 @@ public class HiirenKuuntelija implements MouseListener {
      */
     private Peli peli;
     /**
-     * Hiiren klikkauksen toiminto riippuu siitä onko liikutettava vanki valittu vai ei
+     * Hiiren klikkauksen toiminto riippuu siitä onko liikutettava vanki valittu
+     * vai ei
      */
     private boolean vankiValittu;
     /**
@@ -65,25 +67,16 @@ public class HiirenKuuntelija implements MouseListener {
         if (this.kesken) {
             if (sarake != -1) {
                 if (vankiValittu) {
-                    if (rivi == -1) {
-                        if (this.peli.valitseVanki(rivi, sarake)) {
-                            this.vankiValittu = true;
-                        } else {
-                            this.vankiValittu = false;
-                        }
-                    } else if (this.peli.valitseVanki(rivi, sarake)) {
+                    if (rivi == -1) { //Jos pelaaja haluaa vaihtaa uuteen Vankiin
+                        valitseVanki(rivi, sarake);
+                    } else if (this.peli.valitseVanki(rivi, sarake)) { //Jos pelaaja haluaa vaihtaa toiseen laudalla olevaan Vankiin
                         this.vankiValittu = true;
                     } else if (this.peli.vuoro(rivi, sarake)) {
                         this.kesken = this.peli.kesken;
                         vankiValittu = false;
                     }
                 } else {
-                    //valitaan siirrettävä vanki
-                    if (this.peli.valitseVanki(rivi, sarake)) {
-                        this.vankiValittu = true;
-                    } else {
-                        this.vankiValittu = false;
-                    }
+                    valitseVanki(rivi, sarake);
                 }
             }
         }
@@ -100,5 +93,14 @@ public class HiirenKuuntelija implements MouseListener {
 //        }
         component.repaint();
 
+    }
+
+    private void valitseVanki(int rivi, int sarake) {
+        
+        if (this.peli.valitseVanki(rivi, sarake)) {
+            this.vankiValittu = true;
+        } else {
+            this.vankiValittu = false;
+        }
     }
 }

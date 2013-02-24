@@ -22,3 +22,4 @@ to 21.2.	4h: Pelin toiminnallisuus hälytystä lukuunottamatta valmis, Demotilai
 			3h: Pelin virheettömän toiminnan varmistus, virheiden korjailua, loput perustoiminnallisuudesta
 pe 22.2. 	6h: Dokumentaatio kirjoitettu testausdokumenttia lukuunottamatta
 			2h: Testien kirjoittelua
+su 24.2.	10h: Lisää yksikkötestien kirjoittelua, pelin käsin testausta, testausdokumentti, clean code-periaatteiden noudatus
